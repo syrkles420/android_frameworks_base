@@ -4998,9 +4998,8 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
             if (!mSuppressIdleStateChangeCall) {
                 reportScrollStateChange(OnScrollListener.SCROLL_STATE_IDLE);
             }
-            if (clearCache) {
+            if (clearCache)
                 clearScrollingCache();
-            }
             mScroller.abortAnimation();
 
             if (mFlingStrictSpan != null) {
