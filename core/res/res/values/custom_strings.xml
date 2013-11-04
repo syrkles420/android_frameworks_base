@@ -29,4 +29,9 @@
     <!-- Vendor warning -->
     <string name="system_error_vendorprint">Your vendor image does not match the system. Please flash the <xliff:g id="string">%s</xliff:g> vendor image for your device</string>
 
+    <!-- ADB notifications -->
+    <string name="adb_net_active_notification_title">ADB over network enabled</string>
+    <string name="adb_both_active_notification_title">ADB over USB &amp; network enabled</string>
+    <string name="adb_active_generic_notification_message">Touch to disable debugging.</string>
+
 </resources>
