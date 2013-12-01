@@ -4275,6 +4275,13 @@ public final class Settings {
         public static final String ANBI_ENABLED = "anbi_enabled";
 
         /**
+         * Whether to mute annoying notifications
+         * @hide
+         */
+        public static final String MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD =
+                "mute_annoying_notifications_threshold";
+
+        /**
          * Whether the battery light should be enabled (if hardware supports it)
          * The value is boolean (1 or 0).
          * @hide
@@ -4846,6 +4853,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_CUSTOM_HEADER_IMAGE);
             PRIVATE_SETTINGS.add(SCREENSHOT_DEFAULT_MODE);
             PRIVATE_SETTINGS.add(SYSTEM_THEME_STYLE);
+            PRIVATE_SETTINGS.add(MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD);
         }
 
         /**
