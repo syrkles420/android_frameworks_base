@@ -18,7 +18,7 @@
 
     <!-- Edge gesture service -->
     <dimen name="edge_gesture_trigger_distance">12dp</dimen>
-    <dimen name="edge_gesture_perpendicular_distance">15dp</dimen>
-    <dimen name="edge_gesture_trigger_thickness">12dp</dimen>
+    <dimen name="edge_gesture_perpendicular_distance">22dp</dimen>
+    <dimen name="edge_gesture_trigger_thickness">15dp</dimen>
 
 </resources>
