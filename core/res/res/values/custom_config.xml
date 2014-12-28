@@ -70,4 +70,7 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">64</integer>
 
+    <!-- Screen record -->
+    <bool name="config_enableScreenrecordChord">true</bool>
+
 </resources>
