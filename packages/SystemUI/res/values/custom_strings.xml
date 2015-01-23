@@ -207,4 +207,8 @@
 
     <string name="tuner_cellular_title">Mobile</string>
 
+    <!-- ADB over network QS tile -->
+    <string name="quick_settings_network_adb_label">ADB over network</string>
+    <string name="quick_settings_network_adb_null_label">ADB-Over-Network</string>
+
 </resources>
