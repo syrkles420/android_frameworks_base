@@ -150,4 +150,7 @@
     <string name="quick_settings_expanded_navigation_off">Hide navbar</string>
     <string name="quick_settings_expanded_statusbar_off">Hide statusbar</string>
 
+    <!-- USB tethering QS Tile -->
+    <string name="quick_settings_usb_tether_label">USB tethering</string>
+
 </resources>
