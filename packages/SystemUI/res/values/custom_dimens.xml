@@ -70,4 +70,7 @@
     <!-- QS corner content padding -->
     <dimen name="qs_corner_content_padding">8dp</dimen>
 
+    <!-- QS detail view scrolling -->
+    <dimen name="qs_detail_item_height_twoline">72dp</dimen>
+
 </resources>
