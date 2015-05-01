@@ -1143,7 +1143,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER), false, this,
                     UserHandle.USER_ALL);
-	        resolver.registerContentObserver(Settings.System.getUriFor(
+	    resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.THREE_FINGER_GESTURE), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2874,7 +2874,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 updateOrientationListenerLp(); // Enable, disable the orientation listener
             }
 
-
             // volume rocker wake
             mVolumeRockerWake = Settings.System.getIntForUser(resolver,
                     Settings.System.VOLUME_ROCKER_WAKE, 0, UserHandle.USER_CURRENT) != 0;
@@ -3002,16 +3001,16 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mIncallHomeBehavior = (Settings.System.getIntForUser(resolver,
                     Settings.System.ALLOW_INCALL_HOME, 1, UserHandle.USER_CURRENT) == 1);
 
-            mVolumeMusicControl = Settings.System.getIntForUser(resolver,
-                    Settings.System.VOLUME_BUTTON_MUSIC_CONTROL, 0,
-                    UserHandle.USER_CURRENT) != 0;
             mUseGestureButton = Settings.System.getIntForUser(resolver,
                     Settings.System.OMNI_USE_BOTTOM_GESTURE_NAVIGATION, 0,
                     UserHandle.USER_CURRENT) != 0;
 
+            mVolumeMusicControl = Settings.System.getIntForUser(resolver,
+                    Settings.System.VOLUME_BUTTON_MUSIC_CONTROL, 0,
+                    UserHandle.USER_CURRENT) != 0;
+
             mVolumeAnswer = (Settings.System.getIntForUser(resolver,
                     Settings.System.ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER, 0, UserHandle.USER_CURRENT) == 1);
-
         }
         synchronized (mWindowManagerFuncs.getWindowManagerLock()) {
             WindowManagerPolicyControl.reloadFromSetting(mContext);
@@ -3019,7 +3018,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if (updateRotation) {
             updateRotation(true);
         }
-
         if (mUseGestureButton && !mGestureButtonRegistered) {
             mGestureButton = new GestureButton(mContext, this);
             mWindowManagerFuncs.registerPointerEventListener(mGestureButton);
@@ -7294,6 +7292,17 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             return false;
         }
 
+        IDreamManager dreamManager = getDreamManager();
+        try {
+            if (dreamManager != null && dreamManager.isDozing()) {
+                if (event != null && isVolumeKey(event) && mVolumeMusicControl) {
+                    return false;
+                }
+            }
+        } catch (RemoteException e) {
+            Slog.e(TAG, "RemoteException when checking if dreaming", e);
+        }
+
         boolean isDozing = isDozeMode();
 
         if (isDozing) {
@@ -7640,7 +7649,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mPowerManager.wakeUp(wakeTime, reason);
         }
 	return true;
-
     }
 
     private void finishKeyguardDrawn() {
@@ -8384,7 +8392,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         // In normal flow, systemReady is called before other system services are ready.
         // So it is better not to bind keyguard here.
         mPocketManager = (PocketManager) mContext.getSystemService(Context.POCKET_SERVICE);
-		
+
         mKeyguardDelegate.onSystemReady();
 
         mVrManagerInternal = LocalServices.getService(VrManagerInternal.class);
@@ -9724,6 +9732,19 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
+    private static String allowAllRotationsToString(int allowAll) {
+        switch (allowAll) {
+            case -1:
+                return "unknown";
+            case 0:
+                return "false";
+            case 1:
+                return "true";
+            default:
+                return Integer.toString(allowAll);
+        }
+    }
+
     private static int getSystemUiVisibility(WindowState win, LayoutParams attrs) {
         attrs = attrs != null ? attrs : win.getAttrs();
         int vis = win != null ? win.getSystemUiVisibility()
@@ -9744,19 +9765,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private static int adjustClearableFlags(WindowState win, int clearableFlags) {
         final LayoutParams attrs = win != null ? win.getAttrs() : null;
         return WindowManagerPolicyControl.adjustClearableFlags(attrs, clearableFlags);
-    }
-
-    private static String allowAllRotationsToString(int allowAll) {
-        switch (allowAll) {
-            case -1:
-                return "unknown";
-            case 0:
-                return "false";
-            case 1:
-                return "true";
-            default:
-                return Integer.toString(allowAll);
-        }
     }
 
     private static String endcallBehaviorToString(int behavior) {
