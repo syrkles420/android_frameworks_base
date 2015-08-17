@@ -67,6 +67,7 @@ import com.android.systemui.qs.tiles.SleepScreenTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.UserTile;
+import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.WeatherTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
@@ -185,6 +186,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new SleepScreenTile(mHost);
             case "smartpixels":
                 return new SmartPixelsTile(mHost);
+            case "volume_panel":
+                return new VolumeTile(mHost);
         }
 
         // Intent tiles.
