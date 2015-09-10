@@ -51,4 +51,7 @@
     <!-- App Blacklist -->
     <string name="app_blacklist">Blacklist app</string>
 
+    <!-- On-The-Go -->
+    <string name="global_action_onthego">On-The-Go</string>
+
 </resources>
