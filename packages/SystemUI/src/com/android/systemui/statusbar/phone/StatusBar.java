@@ -5193,7 +5193,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private LiquidSettingsObserver mLiquidSettingsObserver = new LiquidSettingsObserver(mHandler);
     private class LiquidSettingsObserver extends ContentObserver {
-        
         LiquidSettingsObserver(Handler handler) {
             super(handler);
         }
@@ -5204,6 +5203,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.HEADS_UP_STOPLIST_VALUES), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_BLACKLIST_VALUES), false, this);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.DOZE_ENABLED),
+                    false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_FOOTER_WARNINGS),
                     false, this, UserHandle.USER_ALL);
