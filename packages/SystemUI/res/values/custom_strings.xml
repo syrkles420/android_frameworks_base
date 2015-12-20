@@ -263,4 +263,7 @@
     <!-- OnTheGo QS Tile -->
     <string name="quick_settings_onthego_label">On-The-Go</string>
 
+    <!-- SleepScreen QS Tile -->
+    <string name="quick_settings_sleepscreen_label">Sleep Screen</string>
+
 </resources>
