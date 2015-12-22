@@ -51,6 +51,7 @@ import com.android.systemui.qs.tiles.HWKeysTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.LteTile;
+import com.android.systemui.qs.tiles.NavBarTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.RebootTile;
@@ -60,11 +61,9 @@ import com.android.systemui.qs.tiles.ScreenrecordTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.ScreenStabilizationTile;
 import com.android.systemui.qs.tiles.CalcTile;
-import com.android.systemui.qs.tiles.SmartPixelsTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.UserTile;
-import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.WeatherTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
@@ -157,8 +156,6 @@ public class QSFactoryImpl implements QSFactory {
                 return new AmbientDisplayTile(mHost);
             case "adb_network":
                 return new AdbOverNetworkTile(mHost);
-            case "volume_panel":
-                return new VolumeTile(mHost);
             case "weather":
                 return new WeatherTile(mHost);
             case "alarm":
@@ -177,6 +174,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new CompassTile(mHost);
             case "liquid":
                 return new LiquidTile(mHost);
+            case "navbar":
+                return new NavBarTile(mHost);
         }
 
         // Intent tiles.
