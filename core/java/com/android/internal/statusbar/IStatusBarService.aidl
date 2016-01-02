@@ -106,6 +106,7 @@ interface IStatusBarService
      * LIQUID
      */
     void toggleCameraFlash();
+    void setAutoRotate(boolean enabled);
     void toggleRecentApps();
     void toggleSplitScreen();
     void preloadRecentApps();
