@@ -5181,6 +5181,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SYSTEM_UI_THEME),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_ROTATION),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5196,6 +5199,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 // Keeps us from overloading the system by performing these tasks every time.
                 unloadAccents();
                 updateAccents();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_ROTATION))) {
+                updateLockScreenRotation();
             }
             update();
         }
@@ -5207,8 +5213,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             setLockscreenMediaMetadata();
             setLockscreenDoubleTapToSleep();
             setStatusDoubleTapToSleep();
-	    setBrightnessSlider();
+            setBrightnessSlider();
             updateTheme();
+            updateLockScreenRotation();
         }
     }
 
@@ -5243,6 +5250,12 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setStatusDoubleTapToSleep() {
         if (mStatusBarWindow != null) {
             mStatusBarWindow.setStatusDoubleTapToSleep();
+        }
+    }
+
+    private void updateLockScreenRotation() {
+        if (mStatusBarWindowManager != null) {
+            mStatusBarWindowManager.updateKeyguardScreenRotation();
         }
     }
 
