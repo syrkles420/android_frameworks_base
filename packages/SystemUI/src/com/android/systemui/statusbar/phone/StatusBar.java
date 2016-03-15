@@ -5888,6 +5888,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.AMBIENT_DOZE_CUSTOM_BRIGHTNESS),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_ROTATION),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5915,6 +5918,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setBrightnessSlider();
             setBatterySaverWarning();
             updateDozeBrightness();
+            setLockscreenRotation();
         }
     }
 
@@ -5975,6 +5979,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Settings.System.AMBIENT_DOZE_CUSTOM_BRIGHTNESS, defaultDozeBrightness,
                 UserHandle.USER_CURRENT);
         StatusBarWindowManager.updateCustomBrightnessDozeValue(customDozeBrightness);
+    }
+
+    private void setLockscreenRotation() {
+        if (mStatusBarWindowManager != null) {
+            mStatusBarWindowManager.updateKeyguardScreenRotation();
+        }
     }
 
     protected final ContentObserver mNavbarObserver = new ContentObserver(mHandler) {
