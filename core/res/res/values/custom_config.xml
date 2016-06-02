@@ -26,4 +26,7 @@
     <string-array name="config_forceEnabledComponents" translatable="false">
     </string-array>
 
+    <!-- Usb drive persistent notification -->
+    <bool name="config_persistUsbDriveNotification">false</bool>
+
 </resources>
