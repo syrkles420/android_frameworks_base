@@ -24,4 +24,7 @@
     <!-- Force enabled components -->
     <java-symbol type="array" name="config_forceEnabledComponents" />
 
+    <!-- Usb drive persistent notification -->
+    <java-symbol type="bool" name="config_persistUsbDriveNotification" />
+
 </resources>
