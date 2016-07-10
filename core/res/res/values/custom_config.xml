@@ -53,4 +53,7 @@
     <string name="config_deviceKeyHandlerLib" translatable="false"></string>
     <string name="config_deviceKeyHandlerClass" translatable="false"></string>
 
+    <!-- Dash charging support -->
+    <bool name="config_hasDashCharger">false</bool>
+
 </resources>
