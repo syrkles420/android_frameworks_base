@@ -43,6 +43,7 @@ import com.android.systemui.qs.tiles.CallTile;
 import com.android.systemui.qs.tiles.CalendarTile;
 import com.android.systemui.qs.tiles.ExpandedDesktopTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
+import com.android.systemui.qs.tiles.LiquidTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HotspotTile;
@@ -174,6 +175,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new CameraTile(mHost);
             case "compass":
                 return new CompassTile(mHost);
+            case "liquid":
+                return new LiquidTile(mHost);
         }
 
         // Intent tiles.
