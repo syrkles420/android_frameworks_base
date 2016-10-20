@@ -13,10 +13,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <resources>
+
     <declare-styleable name="BatteryBarController">
         <attr name="viewLocation" format="integer" />
     </declare-styleable>
-</resources>
 
+</resources>

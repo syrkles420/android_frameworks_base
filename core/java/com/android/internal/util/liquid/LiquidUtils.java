@@ -38,6 +38,7 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 
 import java.util.List;
+import java.util.Locale;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -188,4 +189,8 @@ public class LiquidUtils {
         context.sendBroadcastAsUser(keyguardIntent, user);
     }
 
+    public static boolean isChineseLanguage() {
+       return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(
+               Locale.CHINESE.getLanguage());
+    }
 }
