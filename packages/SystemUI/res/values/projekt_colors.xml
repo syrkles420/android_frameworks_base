@@ -20,4 +20,6 @@
     <!-- Navigation button ripple color for LightNavigationBar -->
     <color name="navbutton_ripple_color_dark">#ff000000</color>
 
+    <!-- Power save warning color -->
+    <color name="powersave_warning_color">#ffff0000</color> <!-- red -->
 </resources>
