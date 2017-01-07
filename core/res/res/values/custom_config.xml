@@ -73,4 +73,7 @@
     <!-- Screenrecord -->
     <bool name="config_enableScreenrecordChord">true</bool>
 
+    <!-- Emergency button in power menu -->
+    <bool name="config_showEmergencyButtonInPowerMenu">false</bool>
+
 </resources>
