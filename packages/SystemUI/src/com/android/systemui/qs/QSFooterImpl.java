@@ -66,7 +66,7 @@ import com.android.systemui.tuner.TunerService;
 import com.android.systemui.tuner.TunerService.Tunable;
 
 public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
-        OnClickListener,  OnLongClickListener, OnUserInfoChangedListener,
+        OnClickListener, OnUserInfoChangedListener,
         EmergencyListener, SignalCallback {
 
     private static final String QS_FOOTER_SHOW_SETTINGS = "qs_footer_show_settings";
@@ -76,6 +76,7 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     private UserInfoController mUserInfoController;
     private SettingsButton mSettingsButton;
     protected View mSettingsContainer;
+    private View mRunningServicesButton;
     private PageIndicator mPageIndicator;
     private CarrierText mCarrierText;
 
@@ -127,6 +128,9 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         mSettingsContainer = findViewById(R.id.settings_button_container);
         mSettingsButton.setOnClickListener(this);
 
+        mRunningServicesButton = findViewById(R.id.running_services_button);
+        mRunningServicesButton.setOnClickListener(this);
+
         mMobileGroup = findViewById(R.id.mobile_combo);
         mMobileSignal = findViewById(R.id.mobile_signal);
         mMobileRoaming = findViewById(R.id.mobile_roaming);
@@ -145,6 +149,7 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         // RenderThread is doing more harm than good when touching the header (to expand quick
         // settings), so disable it for this view
         ((RippleDrawable) mSettingsButton.getBackground()).setForceSoftware(true);
+        ((RippleDrawable) mRunningServicesButton.getBackground()).setForceSoftware(true);
 
         updateResources();
 
@@ -219,6 +224,7 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
                 .addFloat(mActionsContainer, "alpha", 0, 1)
                 .addFloat(mDragHandle, "alpha", 1, 0, 0)
                 .addFloat(mPageIndicator, "alpha", 0, 1)
+                .addFloat(mRunningServicesButton, "alpha", 0, 1)
                 .setStartDelay(0.15f)
                 .build();
     }
@@ -374,7 +380,27 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
                     mExpanded ? MetricsProto.MetricsEvent.ACTION_QS_EXPANDED_SETTINGS_LAUNCH
                             : MetricsProto.MetricsEvent.ACTION_QS_COLLAPSED_SETTINGS_LAUNCH);
             startSettingsActivity();
+        } else if (v == mRunningServicesButton) {
+            MetricsLogger.action(mContext,
+                    mExpanded ? MetricsProto.MetricsEvent.ACTION_QS_EXPANDED_SETTINGS_LAUNCH
+                            : MetricsProto.MetricsEvent.ACTION_QS_COLLAPSED_SETTINGS_LAUNCH);
+            startRunningServicesActivity();
         }
+    }
+
+    public boolean onLongClick(View v) {
+        if (v == mSettingsButton) {
+            startHavocSettingsActivity();
+            vibrateheader(20);
+        }
+        return false;
+    }
+
+    private void startRunningServicesActivity() {
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                "com.android.settings.Settings$DevRunningServicesActivity");
+        mActivityStarter.startActivity(intent, true /* dismissShade */);
     }
 
     private void startSettingsActivity() {
