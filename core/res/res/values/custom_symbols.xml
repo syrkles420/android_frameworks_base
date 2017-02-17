@@ -87,4 +87,13 @@
     <!-- Emergency button in power menu -->
     <java-symbol type="bool" name="config_showEmergencyButtonInPowerMenu" />
 
+    <!-- Define optional package verifier name -->
+    <java-symbol type="string" name="config_optionalPackageVerifierName" />
+
+    <!-- Sms authorization request to timeout -->
+    <java-symbol type="integer" name="config_sms_authorization_timeout_ms" />
+
+    <!-- Enable sms authorization framework -->
+    <java-symbol type="bool" name="config_sms_authorization_enabled" />
+
 </resources>
