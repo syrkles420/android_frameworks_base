@@ -55,6 +55,7 @@ import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
+import com.android.systemui.omni.OmniJawsClient;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.systemui.ChargingView;
@@ -62,8 +63,9 @@ import com.android.systemui.statusbar.policy.DateView;
 
 import java.util.Locale;
 
-public class KeyguardStatusView extends GridLayout implements
-        OmniJawsClient.OmniJawsObserver {
+public class KeyguardStatusView extends GridLayout implements 
+         OmniJawsClient.OmniJawsObserver {
+
     private static final boolean DEBUG = KeyguardConstants.DEBUG;
     private static final String TAG = "KeyguardStatusView";
     private static final int MARQUEE_DELAY_MS = 2000;
@@ -342,9 +344,8 @@ public class KeyguardStatusView extends GridLayout implements
         queryAndUpdateWeather();
     }
 
-
     @Override
-    public void weatherError() {
+    public void weatherError(int errorReason) {
         // Do nothing
     }
 
