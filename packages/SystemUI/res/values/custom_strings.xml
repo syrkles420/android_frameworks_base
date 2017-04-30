@@ -21,4 +21,8 @@
     <!-- HSPA+ for accessibility -->
     <string name="accessibility_data_connection_hspap">HSPA+</string>
 
+    <!-- Recents task locking -->
+    <string name="accessibility_lock_task">Prevent <xliff:g id="task">%1$s</xliff:g> from being dismissed</string>
+    <string name="accessibility_unlock_task">Allow <xliff:g id="task">%1$s</xliff:g> to be dismissed</string>
+
 </resources>
