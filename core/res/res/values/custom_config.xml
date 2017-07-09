@@ -56,8 +56,8 @@
     <!-- Dash charging support -->
     <bool name="config_hasDashCharger">false</bool>
 
-  <!-- Whether device has turbo power charging support -->
-  <bool name="config_hasTurboPowerCharger">false</bool>
+    <!-- Whether device has turbo power charging support -->
+    <bool name="config_hasTurboPowerCharger">false</bool>
 
     <!-- Hardware keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -116,5 +116,16 @@
     <!-- Full screen aspect ratio -->
     <bool name="config_haveHigherAspectRatioScreen">false</bool>
     <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
+
+    <!-- Sensor block per-package -->
+    <string-array name="config_blockPackagesSensorDrain">
+        <item>com.whatsapp</item>
+        <item>com.gbwhatsapp</item>
+        <item>com.yowhatsapp</item>
+        <item>com.whatsapp.plus</item>
+        <item>org.telegram.messenger</item>
+        <item>org.telegram.messenger.plus</item>
+        <item>com.snapchat.android</item>
+    </string-array>
 
 </resources>
