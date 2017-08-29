@@ -29,4 +29,8 @@
     <!-- Usb drive persistent notification -->
     <bool name="config_persistUsbDriveNotification">false</bool>
 
+    <!-- Button brightness -->
+    <integer name="config_buttonBrightnessSettingDefault">255</integer>
+    <bool name="config_deviceHasVariableButtonBrightness">false</bool>
+
 </resources>
