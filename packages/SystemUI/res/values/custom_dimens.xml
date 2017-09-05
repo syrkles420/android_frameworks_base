@@ -16,20 +16,11 @@
 -->
 <resources>
 
-    <!-- System clock rotation sensor -->
-    <java-symbol type="bool" name="config_useSystemClockforRotationSensor" />
-
-    <!-- Disabled components -->
-    <java-symbol type="array" name="config_disabledComponents" />
-
-    <!-- Force enabled components -->
-    <java-symbol type="array" name="config_forceEnabledComponents" />
-
-    <!-- Usb drive persistent notification -->
-    <java-symbol type="bool" name="config_persistUsbDriveNotification" />
-
-    <!-- Button brightness -->
-    <java-symbol type="integer" name="config_buttonBrightnessSettingDefault" />
-    <java-symbol type="bool" name="config_deviceHasVariableButtonBrightness" />
+    <!-- Floating action button -->
+    <dimen name="floating_action_button_height">54dp</dimen>
+    <dimen name="floating_action_button_width">54dp</dimen>
+    <dimen name="floating_action_button_translation_z">12dp</dimen>
+    <dimen name="floating_action_button_margin_side">32dp</dimen>
+    <dimen name="floating_action_button_margin_bottom">46dp</dimen>
 
 </resources>
