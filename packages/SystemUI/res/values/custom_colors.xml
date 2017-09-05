@@ -16,20 +16,8 @@
 -->
 <resources>
 
-    <!-- System clock rotation sensor -->
-    <java-symbol type="bool" name="config_useSystemClockforRotationSensor" />
-
-    <!-- Disabled components -->
-    <java-symbol type="array" name="config_disabledComponents" />
-
-    <!-- Force enabled components -->
-    <java-symbol type="array" name="config_forceEnabledComponents" />
-
-    <!-- Usb drive persistent notification -->
-    <java-symbol type="bool" name="config_persistUsbDriveNotification" />
-
-    <!-- Button brightness -->
-    <java-symbol type="integer" name="config_buttonBrightnessSettingDefault" />
-    <java-symbol type="bool" name="config_deviceHasVariableButtonBrightness" />
+    <!-- Floating action button -->
+    <color name="fab_color">@*android:color/material_deep_teal_500</color>
+    <color name="floating_action_button_icon_color">#ffffff</color>
 
 </resources>
