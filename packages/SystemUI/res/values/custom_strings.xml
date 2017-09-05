@@ -25,4 +25,9 @@
     <string name="accessibility_lock_task">Prevent <xliff:g id="task">%1$s</xliff:g> from being dismissed</string>
     <string name="accessibility_unlock_task">Allow <xliff:g id="task">%1$s</xliff:g> to be dismissed</string>
 
+    <!-- LTE QS Tile -->
+    <string name="qs_lte_label">LTE</string>
+    <string name="lte_on">LTE ON </string>
+    <string name="lte_off">LTE OFF</string>
+
 </resources>
