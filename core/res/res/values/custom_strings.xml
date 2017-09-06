@@ -42,4 +42,7 @@
     <string name="permlab_toggleNavigationEditor">control navigation editor</string>
     <string name="permdesc_toggleNavigationEditor">Allows an application to control the navigation bar editor.</string>
 
+    <!-- Pocket Lock -->
+    <string name="pocket_lock_message_long_press">Long press power button to interact</string>
+
 </resources>
