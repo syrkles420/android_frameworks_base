@@ -2358,6 +2358,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             return false;
         }
 
+        if (mEntryManager.shouldSkipHeadsUp(sbn)) {
+            return false;
+        }
+
         if (sbn.getNotification().fullScreenIntent != null) {
             if (mAccessibilityManager.isTouchExplorationEnabled()) {
                 if (DEBUG) Log.d(TAG, "No peeking: accessible fullscreen: " + sbn.getKey());
@@ -5491,6 +5495,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_HEADER_STYLE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LESS_BORING_HEADS_UP),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5538,6 +5545,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.QS_HEADER_STYLE))) {
                 stockQSHeaderStyle();
                 updateQSHeaderStyle();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LESS_BORING_HEADS_UP))) {
+                setUseLessBoringHeadsUp();
             }
         }
 
@@ -5559,6 +5569,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setBrightnessSlider();
             updateTickerAnimation();
             updateTickerTickDuration();
+            setUseLessBoringHeadsUp();
         }
     }
 
@@ -5624,6 +5635,25 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mTicker != null) {
             mTicker.updateTickDuration(mTickerTickDuration);
         }
+    }
+
+    private void setFpToDismissNotifications() {
+        mFpDismissNotifications = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS, 0,
+                UserHandle.USER_CURRENT) == 1;
+    }
+
+    private void setPulseBlacklist() {
+        String blacklist = Settings.System.getStringForUser(mContext.getContentResolver(),
+                Settings.System.PULSE_APPS_BLACKLIST, UserHandle.USER_CURRENT);
+        getMediaManager().setPulseBlacklist(blacklist);
+    }
+
+    private void setUseLessBoringHeadsUp() {
+        boolean lessBoringHeadsUp = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LESS_BORING_HEADS_UP, 0,
+                UserHandle.USER_CURRENT) == 1;
+        mEntryManager.setUseLessBoringHeadsUp(lessBoringHeadsUp);
     }
 
     public int getWakefulnessState() {
@@ -6180,18 +6210,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     public boolean isDeviceInVrMode() {
         return mVrMode;
-    }
-
-    private void setFpToDismissNotifications() {
-        mFpDismissNotifications = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS, 0,
-                UserHandle.USER_CURRENT) == 1;
-    }
-
-    private void setPulseBlacklist() {
-        String blacklist = Settings.System.getStringForUser(mContext.getContentResolver(),
-                Settings.System.PULSE_APPS_BLACKLIST, UserHandle.USER_CURRENT);
-        getMediaManager().setPulseBlacklist(blacklist);
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {
