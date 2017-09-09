@@ -45,4 +45,7 @@
     <!-- SystemUI tuner -->
     <string name="statusbar_items_title">Statusbar icon</string>
 
+    <!-- PiP QS Tile -->
+    <string name="quick_settings_pip_label">PiP</string>
+
 </resources>
