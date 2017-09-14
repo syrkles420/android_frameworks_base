@@ -155,6 +155,7 @@ import com.android.keyguard.KeyguardHostView.OnDismissAction;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.keyguard.ViewMediatorCallback;
+import com.android.settingslib.Utils;
 import com.android.systemui.ActivityStarterDelegate;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.DejankUtils;
@@ -452,6 +453,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     // settings
     private QSPanel mQSPanel;
+    private int mBatterySaverWarningColor;
 
     // top bar
     protected KeyguardStatusBarView mKeyguardStatusBar;
@@ -894,8 +896,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         createAndAddWindows();
 
         mSettingsObserver.onChange(false); // set up
-        mNosSettingsObserver.observe();
-        mNosSettingsObserver.update();
+        mLiquidSettingsObserver.observe();
+        mLiquidSettingsObserver.update();
         mCommandQueue.disable(switches[0], switches[6], false /* animate */);
         setSystemUiVisibility(switches[1], switches[7], switches[8], 0xffffffff,
                 fullscreenStackBounds, dockedStackBounds);
@@ -3403,6 +3405,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (powerSave && getBarState() == StatusBarState.SHADE) {
             mode = MODE_WARNING;
         }
+        if (mode == MODE_WARNING) {
+            transitions.setWarningColor(mBatterySaverWarningColor);
+        }
         transitions.transitionTo(mode, anim);
     }
 
@@ -5872,9 +5877,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     };
 
-    private NosSettingsObserver mNosSettingsObserver = new NosSettingsObserver(mHandler);
-    private class NosSettingsObserver extends ContentObserver {
-        NosSettingsObserver(Handler handler) {
+    private LiquidSettingsObserver mLiquidSettingsObserver = new LiquidSettingsObserver(mHandler);
+    private class LiquidSettingsObserver extends ContentObserver {
+        LiquidSettingsObserver(Handler handler) {
             super(handler);
         }
 
@@ -5889,6 +5894,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BATTERY_SAVER_MODE_COLOR),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5900,6 +5908,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setLockscreenDoubleTapToSleep();
             setStatusDoubleTapToSleep();
             setLockscreenMediaMetadata();
+            setBatterySaverWarning();
         }
     }
 
@@ -5918,6 +5927,16 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setLockscreenMediaMetadata() {
         mLockscreenMediaMetadata = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.LOCKSCREEN_MEDIA_METADATA, 0, UserHandle.USER_CURRENT) == 1;
+    }
+
+    private void setBatterySaverWarning() {
+        mBatterySaverWarningColor = Settings.System.getIntForUser(
+            mContext.getContentResolver(),
+                Settings.System.BATTERY_SAVER_MODE_COLOR, 0,
+                UserHandle.USER_CURRENT);
+        if (mBatterySaverWarningColor != 0) {
+            mBatterySaverWarningColor = Utils.getColorAttr(mContext, android.R.attr.colorError);
+        }
     }
 
     private RemoteViews.OnClickHandler mOnClickHandler = new RemoteViews.OnClickHandler() {
@@ -7497,6 +7516,14 @@ public class StatusBar extends SystemUI implements DemoMode,
             boolean isForCurrentUser = isNotificationForCurrentProfiles(notification);
             Log.d(TAG, "notification is " + (isForCurrentUser ? "" : "not ") + "for you");
         }
+
+        mBatterySaverWarningColor = Settings.System.getIntForUser(
+                mContext.getContentResolver(),
+                Settings.System.BATTERY_SAVER_MODE_COLOR, 0,
+                UserHandle.USER_CURRENT);
+        if (mBatterySaverWarningColor != 0) {
+            mBatterySaverWarningColor = Utils.getColorAttr(mContext, android.R.attr.colorError);
+         }
 
         setAreThereNotifications();
     }
