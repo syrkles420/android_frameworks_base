@@ -34,4 +34,7 @@
     <integer name="config_buttonBrightnessSettingDefault">255</integer>
     <bool name="config_deviceHasVariableButtonBrightness">false</bool>
 
+    <!-- IME selector notification -->
+    <bool name="config_show_cmIMESwitcher">false</bool>
+
 </resources>

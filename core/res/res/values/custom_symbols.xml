@@ -43,4 +43,7 @@
     <!-- Vendor warning -->
     <java-symbol type="string" name="system_error_vendorprint" />
 
+    <!-- IME selector notification -->
+    <java-symbol type="bool" name="config_show_cmIMESwitcher"/>
+
 </resources>
