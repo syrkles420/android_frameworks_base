@@ -50,6 +50,7 @@ import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.HWKeysTile;
 import com.android.systemui.qs.tiles.IntentTile;
+import com.android.systemui.qs.tiles.LocaleTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.LteTile;
 import com.android.systemui.qs.tiles.NavBarTile;
@@ -197,6 +198,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new AmbientPlayTile(mHost);
             case "pie":
                 return new PieTile(mHost);
+            case "locale":
+                return new LocaleTile(mHost);
         }
 
         // Intent tiles.
