@@ -172,4 +172,10 @@
     <java-symbol type="color" name="generic_theme_primary_dark" />
     <java-symbol type="color" name="generic_theme_accent" />
 
+    <!-- Slim recents -->
+    <java-symbol type="integer" name="config_recentDefaultDur" />
+    <java-symbol type="style" name="Animation.SlimRecentScreen" />
+    <java-symbol type="anim" name="recent_screen_fade_out" />
+    <java-symbol type="anim" name="recent_enter" />
+
 </resources>

@@ -128,4 +128,7 @@
         <item>com.snapchat.android</item>
     </string-array>
 
+    <!-- Slim recents -->
+    <integer name="config_recentDefaultDur">150</integer>
+
 </resources>
