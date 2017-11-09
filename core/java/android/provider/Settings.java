@@ -120,6 +120,16 @@ public final class Settings {
     public static final String ACTION_SETTINGS = "android.settings.SETTINGS";
 
     /**
+     * Activity Action: Show screen satbilization settings.
+     * <p>
+     * Input: Nothing.
+     * <p>
+     * Output: Nothing.
+     */
+    @SdkConstant(SdkConstantType.ACTIVITY_INTENT_ACTION)
+    public static final String SCREEN_STABILIZATION_SETTINGS = "android.settings.SCREEN_STABILIZATION";
+
+    /**
      * Activity Action: Show settings to allow configuration of APNs.
      * <p>
      * Input: Nothing.
@@ -4192,11 +4202,18 @@ public final class Settings {
                 ANY_STRING_VALIDATOR;
 
         /**
-         * IMPORTANT: If you add a new public settings you also have to add it to
-         * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
-         * it to PRIVATE_SETTINGS below. Also add a validator that can validate
-         * the setting value. See an example above.
+         * Screen stabilization parameters
+         * @hide
          */
+        public static final String STABILIZATION_ENABLE = "stabilization_enable";
+
+        public static final String STABILIZATION_VELOCITY_FRICTION = "stabilization_velocity_friction";
+
+        public static final String STABILIZATION_POSITION_FRICTION = "stabilization_position_friction";
+
+        public static final String STABILIZATION_LOWPASS_ALPHA = "stabilization_lowpass_alpha";
+
+        public static final String STABILIZATION_VELOCITY_AMPLITUDE = "stabilization_velocity_amplitude";
 
         /**
          * Wether navigation bar is enabled or not
@@ -4385,6 +4402,7 @@ public final class Settings {
         public static final String VIBRATE_ON_CALLWAITING = "vibrate_on_callwaiting";
          /**
          * Whether the phone vibrates on disconnect
+         *
          * @hide
          */
         public static final String VIBRATE_ON_DISCONNECT = "vibrate_on_disconnect";
