@@ -78,7 +78,7 @@
     <!-- Statusbar icon -->
     <string name="statusbar_items_title">Statusbar icon</string>
 
-    <!-- LockScreen Stuff -->
+    <!-- Lockscreen Stuff -->
     <string name="lockscreen_default">Default</string>
     <string name="lockscreen_hidden">None</string>
 
@@ -272,5 +272,8 @@
 
     <!-- Volume QS Tile -->
     <string name="quick_settings_volume_panel_label">Volume Panel</string>
+
+    <!-- Lockscreen Tuner -->
+    <string name="lockscreen_tuner_activity">Lockscreen shortcuts</string>
 
 </resources>
