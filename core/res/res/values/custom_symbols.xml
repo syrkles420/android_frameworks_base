@@ -44,9 +44,6 @@
   <!-- Vendor warning -->
   <java-symbol type="string" name="system_error_vendorprint" />
 
-  <!-- Kill app long press back -->
-  <java-symbol type="string" name="app_killed_message" />
-
   <!-- IME switcher -->
   <java-symbol type="bool" name="config_show_cmIMESwitcher"/>
 
