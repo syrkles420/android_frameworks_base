@@ -121,4 +121,8 @@
     <!-- On-The-Go -->
     <java-symbol type="drawable" name="ic_lock_onthego" />
 
+    <!-- Toast text and bg colors -->
+    <java-symbol type="color" name="toast_bg_color" />
+    <java-symbol type="color" name="toast_text_color" />
+
 </resources>
