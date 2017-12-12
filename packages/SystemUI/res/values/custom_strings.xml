@@ -100,4 +100,7 @@
     <string name="lockscreen_hidden">None</string>
     <string name="custom_hint">Swipe from icon to launch</string>
 
+    <!-- VPN icon -->
+    <string name="status_bar_vpn">VPN</string>
+
 </resources>
