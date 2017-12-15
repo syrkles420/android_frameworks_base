@@ -103,4 +103,7 @@
     <!-- VPN icon -->
     <string name="status_bar_vpn">VPN</string>
 
+    <!-- Roaming icon -->
+    <string name="status_bar_roaming">Roaming</string>
+
 </resources>
