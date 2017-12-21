@@ -242,8 +242,6 @@ public class RequestThreadManager {
                     }
                 } catch (LegacyExceptionUtils.BufferQueueAbandonedException e) {
                     Log.w(TAG, "Surface abandoned, dropping frame. ", e);
-                } catch (IllegalArgumentException e) {
-                    Log.w(TAG, "no valid native surface, dropping frame. ", e);
                 }
             }
 
