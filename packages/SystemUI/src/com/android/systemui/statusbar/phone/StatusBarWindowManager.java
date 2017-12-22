@@ -61,7 +61,7 @@ public class StatusBarWindowManager implements RemoteInputController.Callback, D
     private boolean mHasTopUiChanged;
     private int mBarHeight;
     private boolean mKeyguardScreenRotation;
-    private static float mScreenBrightnessDoze;
+    private final float mScreenBrightnessDoze;
     private final State mCurrentState = new State();
     private OtherwisedCollapsedListener mListener;
 
@@ -72,10 +72,6 @@ public class StatusBarWindowManager implements RemoteInputController.Callback, D
         mKeyguardScreenRotation = shouldEnableKeyguardScreenRotation();
         mScreenBrightnessDoze = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_screenBrightnessDoze) / 255f;
-    }
-
-    public static void updateCustomBrightnessDozeValue(int value) {
-        mScreenBrightnessDoze = value / 255f;
     }
 
     private boolean shouldEnableKeyguardScreenRotation() {
