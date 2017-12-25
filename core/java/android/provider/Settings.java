@@ -5049,6 +5049,18 @@ public final class Settings {
         public static final String ANIMATION_CONTROLS_DURATION = "animation_controls_duration";
 
         /**
+         * Transparent power menu and dialogs
+         * @hide
+         */
+        public static final String TRANSPARENT_POWER_MENU = "transparent_power_menu";
+
+        /**
+         * Dim amount around power/reboot menu dialogs
+         * @hide
+         */
+        public static final String TRANSPARENT_POWER_DIALOG_DIM = "transparent_power_dialog_dim";
+
+        /**
          * Toast animations
          *
          * @hide
