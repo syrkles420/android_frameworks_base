@@ -4306,6 +4306,12 @@ public final class Settings {
         public static final String POWERMENU_LOGOUT = "powermenu_logout";
 
         /**
+         * Whether to display the power menu dialog while on the lockscreen
+         * @hide
+         */
+        public static final String POWERMENU_LOCKSCREEN = "powermenu_lockscreen";
+
+        /**
          * Indicates whether ANBI (Accidental navigation button interaction) is enabled.
          *
          * @hide
