@@ -95,4 +95,7 @@
 
   <!-- Fastscroller text color (Launcher3) -->
   <java-symbol type="color" name="fastscroller_text_color" />
+
+  <!-- Whether the device supports Smart Pixels -->
+  <java-symbol type="bool" name="config_enableSmartPixels" />
 </resources>
