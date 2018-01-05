@@ -90,4 +90,10 @@
     <!-- Sensor block per-package -->
     <java-symbol type="array" name="config_blockPackagesSensorDrain" />
 
+    <!-- Whether device supports an alt. ambient display -->
+    <java-symbol type="bool" name="config_alt_ambient_display"/>
+
+    <!-- Whether to enable doze always on -->
+    <java-symbol type="bool" name="config_enableDozeAlwaysOn"/>
+
 </resources>
