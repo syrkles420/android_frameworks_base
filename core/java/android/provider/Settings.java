@@ -5200,6 +5200,11 @@ public final class Settings {
          */
         public static final String QS_EDIT_TOGGLE = "qs_edit_toggle";
 
+	/** Unlock keystore with fingerprint after reboot
+         * @hide
+         */
+        public static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
+
         /**
          * Force expanded notifications on all apps that support it.
          * @hide
