@@ -87,11 +87,6 @@
         <item>com.snapchat.android</item>
     </string-array>
 
-    <!-- Edge gesture service -->
-    <java-symbol type="dimen" name="edge_gesture_trigger_distance" />
-    <java-symbol type="dimen" name="edge_gesture_perpendicular_distance" />
-    <java-symbol type="dimen" name="edge_gesture_trigger_thickness" />
-
     <!-- Define optional package verifier name -->
     <string name="config_optionalPackageVerifierName" translatable="false"></string>
 
