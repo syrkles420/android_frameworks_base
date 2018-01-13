@@ -88,4 +88,7 @@
     <!-- Force doze notifications -->
     <bool name="config_canForceDozeNotifications">true</bool>
 
+    <!-- Doze always on default value -->
+    <bool name="config_dozeAlwaysOnDisplayEnabledDefault">false</bool>
+
 </resources>
