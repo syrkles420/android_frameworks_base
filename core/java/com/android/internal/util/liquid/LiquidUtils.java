@@ -34,10 +34,12 @@ import android.view.WindowManagerGlobal;
 import android.view.InputDevice;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
+import android.content.res.Resources;
 
 import com.android.internal.statusbar.IStatusBarService;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Some custom utilities
@@ -167,4 +169,8 @@ public class LiquidUtils {
         context.sendBroadcastAsUser(keyguardIntent, user);
     }
 
+    public static boolean isChineseLanguage() {
+       return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(
+               Locale.CHINESE.getLanguage());
+    }
 }
