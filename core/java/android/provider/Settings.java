@@ -6145,14 +6145,21 @@ public final class Settings {
         public static final String POWER_MENU_ANIMATIONS = "power_menu_animations";
 
         /**
-          * Volume dialog timeout
-          * @hide
-          */
-         public static final String VOLUME_DIALOG_TIMEOUT = "volume_dialog_timeout";
+         * Whether to display screenshot in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_SCREENRECORD = "powermenu_screenrecord";
 
-         /** @hide */
-         private static final Validator VOLUME_DIALOG_TIMEOUT_VALIDATOR =
-                new SettingsValidators.InclusiveIntegerRangeValidator(500, 10000);;
+        /**
+         * Volume dialog timeout
+         * @hide
+         */
+        public static final String VOLUME_DIALOG_TIMEOUT = "volume_dialog_timeout";
+
+        /** @hide */
+        private static final Validator VOLUME_DIALOG_TIMEOUT_VALIDATOR =
+               new SettingsValidators.InclusiveIntegerRangeValidator(500, 10000);;
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
