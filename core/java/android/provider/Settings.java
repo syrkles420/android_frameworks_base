@@ -4512,6 +4512,11 @@ public final class Settings {
          * @hide
          */
         public static final String BATTERY_BAR_USE_GRADIENT_COLOR = "battery_bar_use_gradient_color";
+				
+        /**
+         * @hide
+         */
+        public static final String STATUS_BAR_FILE_HEADER_IMAGE = "status_bar_file_header_image";
 
         /**
          * @hide
