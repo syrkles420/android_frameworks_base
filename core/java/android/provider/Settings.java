@@ -9300,6 +9300,14 @@ public final class Settings {
         private static final Validator SYSTEM_NAVIGATION_KEYS_ENABLED_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * Wheter to dismiss notifications on fingerprint left and right swipe action
+         * @hide
+         */
+        public static final String FP_SWIPE_TO_DISMISS_NOTIFICATIONS = "fp_swipe_to_dismiss_notifications";
+
+        private static final Validator FP_SWIPE_TO_DISMISS_NOTIFICATIONS_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * Holds comma separated list of ordering of QS tiles.
          * @hide
          */
@@ -9669,7 +9677,8 @@ public final class Settings {
             VOLUME_HUSH_GESTURE,
             MANUAL_RINGER_TOGGLE_COUNT,
             HUSH_GESTURE_USED,
-            STATUS_BAR_BATTERY_STYLE
+            STATUS_BAR_BATTERY_STYLE,
+            FP_SWIPE_TO_DISMISS_NOTIFICATIONS
         };
 
         /**
@@ -9817,6 +9826,7 @@ public final class Settings {
             VALIDATORS.put(HUSH_GESTURE_USED, HUSH_GESTURE_USED_VALIDATOR);
             VALIDATORS.put(MANUAL_RINGER_TOGGLE_COUNT, MANUAL_RINGER_TOGGLE_COUNT_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_BATTERY_STYLE, STATUS_BAR_BATTERY_STYLE_VALIDATOR);
+            VALIDATORS.put(FP_SWIPE_TO_DISMISS_NOTIFICATIONS, FP_SWIPE_TO_DISMISS_NOTIFICATIONS_VALIDATOR);
         }
 
         /**
