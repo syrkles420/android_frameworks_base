@@ -5079,6 +5079,12 @@ public final class Settings {
         public static final String DATA_DISABLED_ICON = "data_disabled_icon";
 
         /**
+         * Lockscreen Visualizer
+         * @hide
+         */
+        public static final String LOCKSCREEN_VISUALIZER_ENABLED = "lockscreen_visualizer";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5142,7 +5148,8 @@ public final class Settings {
             STATUSBAR_CLOCK_DATE_DISPLAY,
             STATUSBAR_CLOCK_DATE_STYLE,
             STATUSBAR_CLOCK_DATE_FORMAT,
-            STATUSBAR_CLOCK_DATE_POSITION
+            STATUSBAR_CLOCK_DATE_POSITION,
+            LOCKSCREEN_VISUALIZER_ENABLED
         };
 
         /**
@@ -5334,7 +5341,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(TOAST_ICON);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
-            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_ICON);
+	        PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_ICON);
+            PRIVATE_SETTINGS.add(LOCKSCREEN_VISUALIZER_ENABLED);
         }
 
         /**
@@ -8754,18 +8762,17 @@ public final class Settings {
         public static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
 
         /**
+         * Lockscreen Visualizer
+         * @hide
+         */
+        public static final String LOCKSCREEN_VISUALIZER_ENABLED = "lockscreen_visualizer";
+
+        /**
          * Force authorize Substratum (or equivalent) frontend calling packages by ThemeInterfacer
          * The value is boolean (1 or 0).
          * @hide
          */
         public static final String FORCE_AUTHORIZE_SUBSTRATUM_PACKAGES = "force_authorize_substratum_packages";
-
-        /**
-         * Lockscreen Visualizer
-         *
-         * @hide
-         */
-        public static final String LOCKSCREEN_VISUALIZER_ENABLED = "lockscreen_visualizer";
 
         /**
          * This are the settings to be backed up.
