@@ -5426,6 +5426,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                         useDarkTheme, mCurrentUserId);
                 mOverlayManager.setEnabled("com.android.dui.theme.dark",
                         useDarkTheme, mCurrentUserId);
+                mOverlayManager.setEnabled("com.android.gboard.theme.dark",
+                        useDarkTheme, mCurrentUserId);
                 // Check for black and white accent so we don't end up
                 // with white on white or black on black
                 unfuckBlackWhiteAccent();
@@ -5443,6 +5445,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mOverlayManager.setEnabled("com.android.settings.theme.black",
                         useBlackTheme, mCurrentUserId);
                 mOverlayManager.setEnabled("com.android.dui.theme.black",
+                        useBlackTheme, mCurrentUserId);
+                mOverlayManager.setEnabled("com.android.gboard.theme.black",
                         useBlackTheme, mCurrentUserId);
                 // Check for black and white accent so we don't end up
                 // with white on white or black on black
