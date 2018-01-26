@@ -6440,6 +6440,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SYSTEM_THEME_CURRENT_OVERLAY),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+            	    Settings.System.LOCKSCREEN_ROTATION),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -6463,6 +6466,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setQsPanelOptions();
             updateTickerSettings();
             updateTheme();
+            setLockscreenRotation();
         }
     }
 
@@ -6527,6 +6531,12 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mQSPanel != null) {
             mQSPanel.updateSettings();
         }
+    }
+
+    private void setLockscreenRotation() {
+    	if (mStatusBarWindowManager != null) {
+    		mStatusBarWindowManager.updateKeyguardScreenRotation();
+    	}
     }
 
     protected final ContentObserver mNavbarObserver = new ContentObserver(mHandler) {
