@@ -207,10 +207,10 @@
     <string name="omnijaws_package_not_available">OmniJaws not available</string>
     <string name="omnijaws_service_last_update">Last update:</string>
 
-    <!-- CPUInfo tile -->
+    <!-- CPUInfo QS Tile -->
     <string name="quick_settings_cpuinfo_label">CPU Info</string>
 
-    <!-- Battery saver tile -->
+    <!-- Battery saver QS Tile -->
     <string name="battery_saver_qs_tile_fully_charged">Fully Charged</string>
 
     <!-- Data saver icon -->
@@ -255,7 +255,7 @@
     <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_running_services">Open Running Services screen.</string>
 
-    <!-- Assist/Google Tiles -->
+    <!-- Assist/Google QS Tiles -->
     <string name="quick_settings_google_assist_label">Assistant</string>
     <string name="quick_settings_google_voice_assist_label">Voice assist</string>
     <string name="quick_settings_google_now_label">Google</string>
@@ -338,5 +338,8 @@
     <string name="quick_settings_immersive_tile_statusbar">Immersive statusbar</string>
     <string name="quick_settings_immersive_tile_navbar">Immersive navbar</string>
     <string name="quick_settings_immersive_tile_full">Immersive full</string>
+
+    <!-- Sound search QS Tile -->
+    <string name="quick_settings_sound_search">Sound search</string>
 
 </resources>
