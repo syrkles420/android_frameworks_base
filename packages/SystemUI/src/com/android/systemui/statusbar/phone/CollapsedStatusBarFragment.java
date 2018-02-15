@@ -371,7 +371,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             parent.removeView(emergencyViewStub);
         }
     }
-	
+
 	public void updateSettings(boolean animate) {
         try {
             mShowLogo = Settings.System.getIntForUser(
@@ -379,7 +379,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                 UserHandle.USER_CURRENT) == 1;
 			mShowCarrierLabel = Settings.System.getIntForUser(
                 getContext().getContentResolver(), Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
-                UserHandle.USER_CURRENT);	
+                UserHandle.USER_CURRENT);
             if (mNotificationIconAreaInner != null) {
                 if (mShowLogo) {
                     if (mNotificationIconAreaInner.getVisibility() == View.VISIBLE) {
@@ -393,7 +393,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 			((Clock)mClock).updateSettings();
             ((Clock)mCenterClock).updateSettings();
             ((Clock)mLeftClock).updateSettings();
-        } catch (Exception e) {    
+            mStatusBarComponent.updateBatterySettings();
+        } catch (Exception e) {
             // never ever crash here
             Slog.e(TAG, "updateSettings(animate)", e);
         }
