@@ -4781,8 +4781,7 @@ public final class Settings {
                 new InclusiveIntegerRangeValidator(0, 2);
 
         /**
-
-       * Hold current font name and name of the originating package Uses "|" as a delimiter
+         * Hold current font name and name of the originating package Uses "|" as a delimiter
          *
          * @hide
          */
@@ -4796,7 +4795,13 @@ public final class Settings {
         public static final String FONT_PACKAGES = "font_packages";
 
         /**
-       * Whether to use slim recents
+         * Select various accents to go along with system themes
+         *
+         * @hide
+         */
+        public static final String ACCENT_PICKER = "accent_picker";
+
+        /**
          * @hide
          */
         public static final String STATUSBAR_CLOCK_DATE_STYLE = "statusbar_clock_date_style";
