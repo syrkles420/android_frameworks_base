@@ -4051,6 +4051,8 @@ public final class Settings {
          * @hide
          */
         public static final String MTP_DIRTY_HACK = "mtp_dirty_hack";
+        /** @hide */
+        public static final String MTP_DIRTY_HACK_SAVE = "mtp_dirty_hack_save";
 
         /**
          * Enable blocking wakelock

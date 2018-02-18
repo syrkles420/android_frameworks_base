@@ -71,7 +71,6 @@ import android.os.Message;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
-import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.CarrierConfigManager;
@@ -1037,7 +1036,12 @@ public class Tethering extends BaseNetworkObserver {
 
         synchronized (mPublicSync) {
             if (enable) {
-                SystemProperties.set("mtp_hack", "true");
+                int currentState = Settings.System.getInt(mContext.getContentResolver(),
+                       Settings.System.MTP_DIRTY_HACK, 1);
+                Settings.System.putInt(mContext.getContentResolver(),
+                       Settings.System.MTP_DIRTY_HACK_SAVE, currentState);
+                Settings.System.putInt(mContext.getContentResolver(),
+                        Settings.System.MTP_DIRTY_HACK, 0);
                 if (mRndisEnabled) {
                     final long ident = Binder.clearCallingIdentity();
                     try {
@@ -1051,7 +1055,10 @@ public class Tethering extends BaseNetworkObserver {
                     usbManager.setCurrentFunction(UsbManager.USB_FUNCTION_RNDIS, false);
                 }
             } else {
-                SystemProperties.set("mtp_hack", "");
+                int oldState = Settings.System.getInt(mContext.getContentResolver(),
+                       Settings.System.MTP_DIRTY_HACK_SAVE, 1);
+                Settings.System.putInt(mContext.getContentResolver(),
+                        Settings.System.MTP_DIRTY_HACK, oldState);
                 final long ident = Binder.clearCallingIdentity();
                 try {
                     tetherMatchingInterfaces(IControlsTethering.STATE_AVAILABLE,
