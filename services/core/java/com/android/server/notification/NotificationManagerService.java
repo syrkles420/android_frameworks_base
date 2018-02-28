@@ -5099,7 +5099,7 @@ public class NotificationManagerService extends SystemService {
         }
 
         // Don't flash while we are in a call or screen is on
-        if (ledNotification == null || mInCall || mScreenOn) {
+        if (ledNotification == null) {
             mNotificationLight.turnOff();
         } else {
             NotificationRecord.Light light = ledNotification.getLight();
