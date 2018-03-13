@@ -49,9 +49,6 @@
     <!-- App Blacklist -->
     <string name="app_blacklist">Blacklist app</string>
 
-    <!-- On-The-Go -->
-    <string name="global_action_onthego">On-The-Go</string>
-
     <!-- ADB over network -->
     <string name="adb_net_active_notification_title">ADB over network enabled</string>
     <string name="adb_both_active_notification_title">ADB over USB &amp; network enabled</string>
