@@ -668,7 +668,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener, DialogIn
 
     private Action getOnTheGoAction() {
         return new SinglePressAction(com.android.internal.R.drawable.ic_lock_onthego,
-                R.string.global_action_onthego) {
+                com.android.systemui.R.string.global_action_onthego) {
             @Override
             public void onPress() {
                 //takeScreenrecord();

@@ -45,7 +45,4 @@
     <!-- Pocket Lock -->
     <string name="pocket_lock_message_long_press">Long press power button to interact</string>
 
-    <!-- On-The-Go -->
-    <string name="global_action_onthego">On-The-Go Mode</string>
-
 </resources>
