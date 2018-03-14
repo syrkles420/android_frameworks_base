@@ -234,7 +234,7 @@ public class Recents extends SystemUI
         mConfiguration = new Configuration(Utilities.getAppConfiguration(mContext));
         sTaskLoader = new RecentsTaskLoader(mContext);
         mHandler = new Handler();
-        mImpl = new RecentsImpl(mContext, mIconsHandler);
+        mImpl = new RecentsImpl(mContext);
 
         // Check if there is a recents override package
         if (Build.IS_USERDEBUG || Build.IS_ENG) {

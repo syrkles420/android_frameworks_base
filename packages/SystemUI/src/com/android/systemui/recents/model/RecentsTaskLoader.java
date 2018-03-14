@@ -332,6 +332,10 @@ public class RecentsTaskLoader {
                 mHighResThumbnailLoader::setTaskLoadQueueIdle);
     }
 
+    public IconsHandler getIconsHandler() {
+        return mIconsHandler;
+    }
+
     public void setIconsHandler(IconsHandler ih) {
         mIconsHandler = ih;
         mLoader.setIconsHandler(ih);
