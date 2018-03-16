@@ -54,6 +54,7 @@ import com.android.systemui.qs.tiles.PictureInPictureTile;
 import com.android.systemui.qs.tiles.RebootTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.SoundSearchTIle;
+import com.android.systemui.qs.tiles.ScreenStabilizationTile;
 import com.android.systemui.qs.tiles.ScreenrecordTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.SoundTile;
@@ -121,6 +122,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("theme")) return new ThemeTile(mHost);
         else if (tileSpec.equals("immersive")) return new ImmersiveTile(mHost);
         else if (tileSpec.equals("soundsearch")) return new SoundSearchTIle(mHost);
+	else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);
