@@ -21,6 +21,13 @@
         <item name="preferenceTheme">@style/TunerPreferenceTheme</item>
     </style>
 
+    <!-- VPN footer -->
+    <style name="TextAppearance.QS.VPN">
+        <item name="android:textSize">@dimen/qs_tile_text_size</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <!-- Status bar notification ticker -->
     <style name="TextAppearance.StatusBar.PhoneTicker" parent="@*android:style/TextAppearance.StatusBar">
         <item name="android:textSize">14dp</item>
