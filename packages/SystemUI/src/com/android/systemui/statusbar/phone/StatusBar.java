@@ -721,6 +721,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 // pulse colors already set by titckTrackInfo
                 mNavigationBar.setMediaPlaying(true);
             }
+            if (mSlimRecents != null) {
+                mSlimRecents.setMediaPlaying(true, currentPkg);
+            }
         } else {
             mEntryToRefresh = null;
             if (isAmbientContainerAvailable()) {
@@ -728,6 +731,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
             if (mNavigationBar != null) {
                 mNavigationBar.setMediaPlaying(false);
+            }
+            if (mSlimRecents != null) {
+                mSlimRecents.setMediaPlaying(false, "");
             }
         }
     }
@@ -1993,10 +1999,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         entry.row.setLowPriorityStateUpdated(false);
 
         if (mEntryToRefresh == entry) {
-            final Notification n = entry.notification.getNotification();
+            Notification n = entry.notification.getNotification();
             String notificationText = null;
-            final String title = n.extras.getString(Notification.EXTRA_TITLE);
-            final String text = n.extras.getString(Notification.EXTRA_TEXT);
+            String title = n.extras.getString(Notification.EXTRA_TITLE);
+            String text = n.extras.getString(Notification.EXTRA_TEXT);
             if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(text)) {
                 notificationText = title + " - " + text;
             }
@@ -2006,10 +2012,13 @@ public class StatusBar extends SystemUI implements DemoMode,
             if (isAmbientContainerAvailable()) {
                 ((AmbientIndicationContainer)mAmbientIndicationContainer).setIndication(mMediaMetadata, notificationText);
             }
-            final int[] colors = {n.backgroundColor, n.foregroundColor,
+            int[] colors = {n.backgroundColor, n.foregroundColor,
                     n.primaryTextColor, n.secondaryTextColor};
             if (mNavigationBar != null) {
                 mNavigationBar.setPulseColors(n.isColorizedMedia(), colors);
+            }
+            if (mSlimRecents != null) {
+                mSlimRecents.setMediaColors(n.isColorizedMedia(), colors);
             }
         }
     }
