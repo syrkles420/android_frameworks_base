@@ -90,4 +90,10 @@
     <!-- Fastscroller -->
     <color name="fastscroller_text_color">#FFFFFFFF</color>
 
+    <!-- Tooltip light text color -->
+    <color name="tooltip_text_light">@color/foreground_material_light</color>
+
+    <!-- Tooltip dark text color -->
+    <color name="tooltip_text_dark">@color/foreground_material_dark</color>
+
 </resources>
