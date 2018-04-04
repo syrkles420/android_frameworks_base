@@ -61,4 +61,7 @@
     <dimen name="signal_cluster_no_battery_padding">0dp</dimen>
     <dimen name="battery_level_padding_start_no_icon">0dp</dimen>
 
+    <!-- QS corner content padding -->
+    <dimen name="qs_corner_content_padding">8dp</dimen>
+
 </resources>
