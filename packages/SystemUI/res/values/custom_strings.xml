@@ -266,4 +266,8 @@
     <!-- SleepScreen QS Tile -->
     <string name="quick_settings_sleepscreen_label">Sleep Screen</string>
 
+    <!-- SmartPixels QS Tile -->
+    <string name="quick_settings_smart_pixels">Smart Pixels</string>
+    <string name="quick_settings_smart_pixels_on_power_save">Auto-enabled Smart Pixels</string>
+
 </resources>
