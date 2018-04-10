@@ -5002,6 +5002,12 @@ public final class Settings {
         public static final String RECENTS_ICON_PACK = "recents_icon_pack";
 
         /**
+         * Fingerprint Wake-and-Unlock
+         * @hide
+         */
+        public static final String FP_WAKE_AND_UNLOCK = "fp_wake_and_unlock";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5253,6 +5259,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_STYLE);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_FORMAT);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_POSITION);
+            PRIVATE_SETTINGS.add(FP_WAKE_AND_UNLOCK);
         }
 
         /**
