@@ -5765,17 +5765,15 @@ public final class Settings {
         public static final String TOAST_ICON = "toast_icon";
 
         /**
-         * Which component to use for Recents UI
+         * Which kind of style you might want to see on Recents UI
          * 0 - Pie Recents (Quickstep)
          * 1 - Oreo Recents (SystemUI)
+         * 2 - Grid Recents (SystemUI)
+         * 3 - Android Go Recents (SystemUI)
          * @hide
          */
-        public static final String RECENTS_COMPONENT = "recents_component";
+        public static final String RECENTS_LAYOUT_STYLE  = "recents_layout_style";
 
-        /** @hide */
-        public static final Validator RECENTS_COMPONENT_VALIDATOR =
-                new SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
-                
         /**
          * Whether to display app circle sidebar
          * @hide
@@ -6137,7 +6135,6 @@ public final class Settings {
             USE_OLD_MOBILETYPE,
             NOTIFICATION_SOUND_VIB_SCREEN_ON,
             STATUSBAR_HIDE_NOTCH,
-            RECENTS_COMPONENT,
             ONE_HAND_MODE_ENABLED,
             STATUSBAR_SHOW_WIFI_ACTIVITY,
             STATUS_BAR_SHOW_TICKER,
@@ -6294,7 +6291,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);
             PRIVATE_SETTINGS.add(STATUSBAR_HIDE_NOTCH);
             PRIVATE_SETTINGS.add(TOAST_ICON);
-            PRIVATE_SETTINGS.add(RECENTS_COMPONENT);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
             PRIVATE_SETTINGS.add(ONE_HAND_MODE_ENABLED);
@@ -6306,14 +6302,14 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_SHOW_TICKER);
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_ANIMATION_MODE);
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_TICK_DURATION);
-            PRIVATE_SETTINGS.add(NOTIFICATION_STYLE); 
+            PRIVATE_SETTINGS.add(NOTIFICATION_STYLE);
             PRIVATE_SETTINGS.add(QS_HEADER_STYLE);
             PRIVATE_SETTINGS.add(VOLUME_DIALOG_TIMEOUT);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_STATE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_TYPE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
             PRIVATE_SETTINGS.add(VOLUME_KEYS_CONTROL_RING_TONE);
-	    PRIVATE_SETTINGS.add(WEATHER_LOCKSCREEN_UNIT);
+	        PRIVATE_SETTINGS.add(WEATHER_LOCKSCREEN_UNIT);
         }
 
         /**
@@ -6437,7 +6433,6 @@ public final class Settings {
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_SOUND_VIB_SCREEN_ON, NOTIFICATION_SOUND_VIB_SCREEN_ON_VALIDATOR);
             VALIDATORS.put(STATUSBAR_HIDE_NOTCH, STATUSBAR_HIDE_NOTCH_VALIDATOR);
-            VALIDATORS.put(RECENTS_COMPONENT,RECENTS_COMPONENT_VALIDATOR);
             VALIDATORS.put(ONE_HAND_MODE_ENABLED, ONE_HAND_MODE_ENABLED_VALIDATOR);
             VALIDATORS.put(STATUSBAR_SHOW_WIFI_ACTIVITY, STATUSBAR_SHOW_WIFI_ACTIVITY_VALIDATOR);
             VALIDATORS.put(AMBIENT_RECOGNITION, AMBIENT_RECOGNITION_VALIDATOR);
