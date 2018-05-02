@@ -4830,6 +4830,9 @@ public final class Settings {
          */
         public static final String LISTVIEW_ANIMATION = "listview_animation";
 
+        
+        public static final String CHOOSER_ACTIVITY_BLACKLIST = "chooser_activity_blacklist";
+
         /**
          * ListView Interpolators
          * 0 == None
