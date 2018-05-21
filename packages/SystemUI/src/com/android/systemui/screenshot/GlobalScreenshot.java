@@ -42,8 +42,6 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -168,7 +166,8 @@ class SaveImageInBackgroundTask extends AsyncTask<Void, Void, Void> {
         mImageFileName = String.format(SCREENSHOT_FILE_NAME_TEMPLATE, imageDate);
         final PackageManager pm = context.getPackageManager();
         ActivityInfo info = LiquidUtils.getRunningActivityInfo(context);
-        if (info != null) {
+        boolean onKeyguard = context.getSystemService(KeyguardManager.class).isKeyguardLocked();
+        if (info != null && !onKeyguard) {
             CharSequence appName = pm.getApplicationLabel(info.applicationInfo);
             if (appName != null) {
                 // replace all spaces and special chars with an underscore
