@@ -66,4 +66,7 @@
     <color name="quick_settings_theme_tile_black">#000000</color>
     <color name="quick_settings_theme_tile_white">#ffffff</color>
 
+    <!-- Power menu wallpaper tint off color -->
+    <color name="power_menu_wallpaper_tint_off_color">#80202020</color>
+
 </resources>
