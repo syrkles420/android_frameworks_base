@@ -182,4 +182,7 @@
     <java-symbol type="anim" name="last_app_in" />
     <java-symbol type="anim" name="last_app_out" />
 
+    <!-- Fastscroller -->
+    <java-symbol type="color" name="fastscroller_text_color" />
+
 </resources>
