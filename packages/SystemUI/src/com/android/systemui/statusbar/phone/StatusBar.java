@@ -758,7 +758,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     public void triggerAmbientForMedia() {
-        if (mAmbientMediaPlaying == 2 || mAmbientMediaPlaying == 3) {
+        if (mAmbientMediaPlaying == 2) {
             mDozeServiceHost.fireNotificationMedia();
         }
     }
@@ -6652,7 +6652,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                         // Otherwise just show the always-on screen.
                         setPulsing(pulsingEntries);
                     }
-                    setOnPulseEvent((mAmbientMediaPlaying == 3 ? reason : -1), true);
+                    setOnPulseEvent((mAmbientMediaPlaying == 2 ? reason : -1), true);
                 }
 
                 @Override
@@ -7201,21 +7201,21 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private void setForceAmbient() {
         mAmbientMediaPlaying = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.FORCE_AMBIENT_FOR_MEDIA, 0,
+                Settings.System.FORCE_AMBIENT_FOR_MEDIA, 2,
                 UserHandle.USER_CURRENT);
         if (isAmbientContainerAvailable()) {
             ((AmbientIndicationContainer)mAmbientIndicationContainer).setIndication(mMediaMetadata, null);
         }
     }
 
+    private boolean isAmbientContainerAvailable() {
+        return mAmbientMediaPlaying != 0 && mAmbientIndicationContainer != null;
+    }
+
     private void setFpToDismissNotifications() {
         mFpDismissNotifications = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS, 0,
                 UserHandle.USER_CURRENT) == 1;
-    }
-
-    private boolean isAmbientContainerAvailable() {
-        return mAmbientMediaPlaying != 0 && mAmbientIndicationContainer != null;
     }
 
     private void updateTickerAnimation() {
