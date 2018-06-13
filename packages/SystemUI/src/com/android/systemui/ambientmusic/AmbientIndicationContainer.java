@@ -68,6 +68,8 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
     }
 
     public void setDozing(boolean dozing) {
+        if (dozing == mDozing) return;
+
         mDozing = dozing;
         setTickerMarquee(dozing);
         if (dozing && mInfoAvailable) {
