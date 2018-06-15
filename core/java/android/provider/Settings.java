@@ -5158,14 +5158,7 @@ public final class Settings {
          */
         public static final String CARBON_CUSTOM_GESTURE_LEFT = "carbon_custom_gesture_left";
 
-
         /**
-         * Recents Clear All Button Style
-         * @hide
-         */
-        public static final String CLEAR_RECENTS_STYLE = "clear_recents_style";
-
-         /**
          * Change the color of the lockscreen bottom camera shortcut
          * @hide
          */
@@ -5176,14 +5169,20 @@ public final class Settings {
          *
          * @hide
          */
-        
         public static final String HIDE_LOCKSCREEN_INDICATOR_DISPLAY = "hide_lockscreen_indicator_display";
 
         /**
+         * Hide lockscreen icon
          *
          * @hide
          */
-         public static final String CLEAR_RECENTS_STYLE_ENABLE = "clear_recents_style_enable";
+        public static final String HIDE_LOCKSCREEN_ICON = "hide_lockscreen_icon";
+
+       /**
+         * Recents Clear All Button Style
+         * @hide
+         */
+        public static final String CLEAR_RECENTS_STYLE = "clear_recents_style";
 
        /**
          * Recents Clear All Button Color
@@ -5936,6 +5935,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(RECENTS_COMPONENT);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
+	    PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_ICON);
         }
 
         /**
