@@ -92,8 +92,6 @@ public class Recents extends SystemUI
         RECENTS_ACTIVITIES.add(RecentsImpl.RECENTS_ACTIVITY);
     }
 
-    public final static Set<Task> sLockedTasks = new HashSet<>();
-
     // Purely for experimentation
     private final static String RECENTS_OVERRIDE_SYSPROP_KEY = "persist.recents_override_pkg";
     private final static String ACTION_SHOW_RECENTS = "com.android.systemui.recents.ACTION_SHOW";
@@ -234,7 +232,7 @@ public class Recents extends SystemUI
         mConfiguration = new Configuration(Utilities.getAppConfiguration(mContext));
         sTaskLoader = new RecentsTaskLoader(mContext);
         mHandler = new Handler();
-        mImpl = new RecentsImpl(mContext);
+        mImpl = new RecentsImpl(mContext, mIconsHandler);
 
         // Check if there is a recents override package
         if (Build.IS_USERDEBUG || Build.IS_ENG) {
