@@ -73,9 +73,9 @@ import java.util.Objects;
 final class WifiDisplayController implements DumpUtils.Dump {
     private static final String TAG = "WifiDisplayController";
     private static final boolean DEBUG =
-            SystemProperties.getBoolean("persist.debug.wfdcdbg",false);
+            SystemProperties.getBoolean("persist.vendor.debug.wfdcdbg",false);
     private static final boolean DEBUGV =
-            SystemProperties.getBoolean("persist.debug.wfdcdbgv",false);
+            SystemProperties.getBoolean("persist.vendor.debug.wfdcdbgv",false);
     private static final int DEFAULT_CONTROL_PORT = 7236;
     private static final int MAX_THROUGHPUT = 50;
     private static final int CONNECTION_TIMEOUT_SECONDS = 30;
