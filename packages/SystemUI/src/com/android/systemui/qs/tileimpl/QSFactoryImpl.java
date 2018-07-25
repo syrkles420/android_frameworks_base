@@ -37,6 +37,7 @@ import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.ExpandedDesktopTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
+import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.GoogleAssistTile;
 import com.android.systemui.qs.tiles.GoogleNowTile;
 import com.android.systemui.qs.tiles.GoogleVoiceAssistTile;
@@ -123,6 +124,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("immersive")) return new ImmersiveTile(mHost);
         else if (tileSpec.equals("soundsearch")) return new SoundSearchTIle(mHost);
 	else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
+	else if (tileSpec.equals("gaming")) return new GamingModeTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);
