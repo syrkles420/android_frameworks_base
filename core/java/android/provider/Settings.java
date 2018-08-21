@@ -10335,12 +10335,6 @@ public final class Settings {
         public static final Validator STATUS_BAR_BATTERY_STYLE_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 4);
 
-        /**
-         * Whether to display the ADB notification.
-         * @hide
-         */
-        public static final String ADB_NOTIFY = "adb_notify";
-
         /** 
          * Whether to vibrate when quick settings tile is pressed.
          * @hide
