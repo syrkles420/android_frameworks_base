@@ -157,6 +157,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new WeatherTile(mHost);
             case "alarm":
                 return new AlarmTile(mHost);
+            case "calc":
+                return new CalcTile(mHost);
         }
 
         // Intent tiles.
