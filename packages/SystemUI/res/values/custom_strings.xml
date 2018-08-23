@@ -157,7 +157,6 @@
 
     <!-- Ambient display QS tile -->
     <string name="quick_settings_ambient_display_label">Ambient Display</string>
-<<<<<<< HEAD:packages/SystemUI/res/values/custom_strings.xml
 
     <!-- On The Go -->
     <string name="onthego_notif_ticker">On-The-Go activated</string>
@@ -210,5 +209,8 @@
 
     <!-- ADB over network QS tile -->
     <string name="quick_settings_network_adb_label">ADB-Over-Network</string>
+
+    <!-- Other QS tiles -->
+    <string name="alarm_title_tile">Alarm</string>
 
 </resources>
