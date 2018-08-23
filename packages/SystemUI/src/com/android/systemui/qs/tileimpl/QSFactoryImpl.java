@@ -166,6 +166,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new CPUInfoTile(mHost);
             case "calendar":
                 return new CalendarTile(mHost);
+            case "call":
+                return new CallTile(mHost);
         }
 
         // Intent tiles.
