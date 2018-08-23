@@ -35,6 +35,7 @@ import com.android.systemui.qs.tiles.CellularTile;
 import com.android.systemui.qs.tiles.CPUInfoTile;
 import com.android.systemui.qs.tiles.CameraTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
+import com.android.systemui.qs.tiles.CompassTile;
 import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.AlarmTile;
@@ -171,6 +172,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new CallTile(mHost);
             case "camera":
                 return new CameraTile(mHost);
+            case "compass":
+                return new CompassTile(mHost);
         }
 
         // Intent tiles.
