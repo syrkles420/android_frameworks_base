@@ -5004,6 +5004,15 @@ public final class Settings {
         /**
          * @hide
          */
+        public static final String OMNI_LOCKSCREEN_WEATHER_ENABLED = "lockscreen_weather_enabled";
+
+        /** @hide */
+        private static final Validator OMNI_LOCKSCREEN_WEATHER_ENABLED_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * @hide
+         */
         public static final String BATTERY_BAR_HIGH_COLOR = "battery_bar_high_color";
 
         /**
@@ -5273,7 +5282,9 @@ public final class Settings {
             OMNI_BUTTON_EXTRA_KEY_MAPPING,
             OMNI_DEVICE_PROXI_CHECK_ENABLED,
             OMNI_DEVICE_FEATURE_SETTINGS,
-            OMNIJAWS_WEATHER_ICON_PACK
+            OMNIJAWS_WEATHER_ICON_PACK,
+            OMNIJAWS_WEATHER_ICON_PACK,
+            OMNI_LOCKSCREEN_WEATHER_ENABLED
         };
 
         /**
@@ -5413,6 +5424,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCKSCREEN_ROTATION);
             PRIVATE_SETTINGS.add(MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD);
             PRIVATE_SETTINGS.add(OMNIJAWS_WEATHER_ICON_PACK);
+            PRIVATE_SETTINGS.add(OMNI_LOCKSCREEN_WEATHER_ENABLED);
         }
 
         /**
@@ -5530,6 +5542,8 @@ public final class Settings {
             VALIDATORS.put(OMNI_DEVICE_FEATURE_SETTINGS, OMNI_DEVICE_FEATURE_SETTINGS_VALIDATOR);
             VALIDATORS.put(MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD, MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD_VALIDATOR);
             VALIDATORS.put(OMNIJAWS_WEATHER_ICON_PACK, OMNIJAWS_WEATHER_ICON_PACK_VALIDATOR);
+            VALIDATORS.put(OMNI_LOCKSCREEN_WEATHER_ENABLED,
+                    OMNI_LOCKSCREEN_WEATHER_ENABLED_VALIDATOR);
         }
 
         /**
