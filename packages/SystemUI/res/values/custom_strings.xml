@@ -140,4 +140,15 @@
     <string name="gaming_mode_dialog_message">When gaming mode is enabled, your ringer mode will change to vibrate mode, all heads-up messages will be disabled and hardware keys will be turned off. Media volume will be increased to the maximum value. All the disabled settings will be reset to default once you exit Gaming Mode.</string>
     <string name="accessibility_quick_settings_gaming_mode_on">Gaming mode on</string>
     <string name="accessibility_quick_settings_gaming_mode_off">Gaming mode off</string>
+
+    <!-- Omni weather -->
+    <string name="omnijaws_service_error">Error</string>
+    <string name="omnijaws_service_unkown">No weather data</string>
+    <string name="omnijaws_service_error_long">Error loading weather data</string>
+    <string name="omnijaws_service_disabled">Service is disabled</string>
+    <string name="omnijaws_detail_header">Weather</string>
+    <string name="omnijaws_label_default">Weather</string>
+    <string name="omnijaws_current_text">Now</string>
+    <string name="omnijaws_package_not_available">OmniJaws not available</string>
+    <string name="omnijaws_service_last_update">Last update:</string>
 </resources>

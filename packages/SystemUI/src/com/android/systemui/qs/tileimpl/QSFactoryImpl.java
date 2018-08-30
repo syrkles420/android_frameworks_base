@@ -52,6 +52,8 @@ import com.android.systemui.qs.tiles.ScreenStabilizationTile;
 import com.android.systemui.qs.tiles.SyncTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.UserTile;
+import com.android.systemui.qs.tiles.VolumeTile;
+import com.android.systemui.qs.tiles.WeatherTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
 import com.android.systemui.qs.QSTileHost;
@@ -137,6 +139,16 @@ public class QSFactoryImpl implements QSFactory {
                 return new ExpandedDesktopTile(mHost);
             case "gaming":
                 return new GamingModeTile(mHost);
+            case "screenrecord":
+                return new ScreenrecordTile(mHost);
+            case "ambient_display":
+                return new AmbientDisplayTile(mHost);
+            case "adb_network":
+                return new AdbOverNetworkTile(mHost);
+            case "volume_panel":
+                return new VolumeTile(mHost);
+            case "weather":
+                return new WeatherTile(mHost);
         }
 
         // Intent tiles.
