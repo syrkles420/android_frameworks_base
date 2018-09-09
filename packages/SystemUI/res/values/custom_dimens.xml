@@ -122,4 +122,7 @@
 
     <dimen name="quick_status_bar_margin">14dp</dimen>
 
+    <!-- Hide header -->
+    <dimen name="quick_status_bar_system_icons_margin_top">8dp</dimen>
+
 </resources>
