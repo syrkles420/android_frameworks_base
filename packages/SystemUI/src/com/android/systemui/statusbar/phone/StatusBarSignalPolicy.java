@@ -52,11 +52,14 @@ public class StatusBarSignalPolicy implements NetworkControllerImpl.SignalCallba
         SecurityController.SecurityControllerCallback, Tunable, ProvisioningChangedListener {
     private static final String TAG = "StatusBarSignalPolicy";
 
+    private static final String SLOT_ROAMING = "roaming";
+
     private final String mSlotAirplane;
     private final String mSlotMobile;
     private final String mSlotWifi;
     private final String mSlotEthernet;
     private final String mSlotVpn;
+    private final String mSlotRoaming;
 
     private static Context mContext;
     private final StatusBarIconController mIconController;
@@ -69,6 +72,8 @@ public class StatusBarSignalPolicy implements NetworkControllerImpl.SignalCallba
     private boolean mBlockWifi;
     private boolean mBlockEthernet;
     private boolean mForceBlockWifi;
+    private boolean mBlockRoaming;
+    private boolean mBlockVpn;
 
     // Track as little state as possible, and only for padding purposes
     private boolean mIsAirplaneMode = false;
@@ -123,10 +128,11 @@ public class StatusBarSignalPolicy implements NetworkControllerImpl.SignalCallba
         Dependency.get(TunerService.class).removeTunable(this);
         mNetworkController.removeCallback(this);
         mSecurityController.removeCallback(this);
+        Dependency.get(TunerService.class).removeTunable(this);
     }
 
     private void updateVpn() {
-        boolean vpnVisible = mSecurityController.isVpnEnabled();
+        boolean vpnVisible = mSecurityController.isVpnEnabled() && !mBlockVpn;
         int vpnIconId = currentVpnIconId(mSecurityController.isVpnBranded());
 
         mIconController.setIcon(mSlotVpn, vpnIconId, null);
@@ -155,16 +161,22 @@ public class StatusBarSignalPolicy implements NetworkControllerImpl.SignalCallba
         boolean blockMobile = blockList.contains(mSlotMobile);
         boolean blockWifi = blockList.contains(mSlotWifi);
         boolean blockEthernet = blockList.contains(mSlotEthernet);
+        boolean blockRoaming = blockList.contains(mSlotRoaming);
+        boolean blockVpn = blockList.contains(mSlotVpn);
 
         if (blockAirplane != mBlockAirplane || blockMobile != mBlockMobile
-                || blockEthernet != mBlockEthernet || blockWifi != mBlockWifi) {
+                || blockEthernet != mBlockEthernet || blockWifi != mBlockWifi
+                || blockRoaming != mBlockRoaming || blockVpn != mBlockVpn) {
             mBlockAirplane = blockAirplane;
             mBlockMobile = blockMobile;
             mBlockEthernet = blockEthernet;
             mBlockWifi = blockWifi || mForceBlockWifi;
+            mBlockRoaming = blockRoaming;
+            mBlockVpn = blockVpn;
             // Re-register to get new callbacks.
             mNetworkController.removeCallback(this);
             mNetworkController.addCallback(this);
+            updateVpn();
         }
     }
 
