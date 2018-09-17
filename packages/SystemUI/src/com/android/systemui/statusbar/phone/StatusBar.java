@@ -812,8 +812,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         createAndAddWindows();
 
-        mNosSettingsObserver.observe();
-        mNosSettingsObserver.update();
+        mLiquidSettingsObserver.observe();
+        mLiquidSettingsObserver.update();
 
         // Make sure we always have the most current wallpaper info.
         IntentFilter wallpaperChangedFilter = new IntentFilter(Intent.ACTION_WALLPAPER_CHANGED);
@@ -5188,10 +5188,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     };
 
-    private NosSettingsObserver mNosSettingsObserver = new NosSettingsObserver(mHandler);
-    private class NosSettingsObserver extends ContentObserver {
+    private LiquidSettingsObserver mLiquidSettingsObserver = new LiquidSettingsObserver(mHandler);
+    private class LiquidSettingsObserver extends ContentObserver {
         
-        NosSettingsObserver(Handler handler) {
+        LiquidSettingsObserver(Handler handler) {
             super(handler);
         }
 
@@ -5227,6 +5227,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_ROTATION),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BURN_IN_PROTECTION),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BURN_IN_PROTECTION_INTERVAL),
                     false, this, UserHandle.USER_ALL);
         }
 
