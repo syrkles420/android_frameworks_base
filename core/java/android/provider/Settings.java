@@ -4678,6 +4678,12 @@ public final class Settings {
         public static final Validator STATUSBAR_CLOCK_DATE_POSITION_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * Clock font color
+         * @hide
+         */
+        public static final String STATUS_BAR_CLOCK_COLOR = "status_bar_clock_color";
+
+        /**
          * Clock font size
          * @hide
          */
@@ -5387,11 +5393,16 @@ public final class Settings {
         public static final String QSFOOTER_SHOW_SERVICES = "qs_footer_show_services";
 
         /**
-	     ** Change fonts for the system lockscreen clock widget
-	     **
-	     ** @hide
-	     **/
+	     * Change fonts for the system lockscreen clock widget
+	     * @hide
+	     */
         public static final String LOCK_CLOCK_FONTS = "lock_clock_fonts";
+
+        /**
+         * Carrier Label Custom Color
+         * @hide
+         */
+        public static final String STATUS_BAR_CARRIER_COLOR = "status_bar_carrier_color";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
