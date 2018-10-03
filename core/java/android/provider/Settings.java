@@ -5469,6 +5469,14 @@ public final class Settings {
         public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
 
         /**
+         * @hide
+         */
+        public static final String STATUSBAR_HIDE_NOTCH = "statusbar_hide_notch";
+
+        /** @hide */
+        private static final Validator STATUSBAR_HIDE_NOTCH_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5552,7 +5560,8 @@ public final class Settings {
             BURN_IN_PROTECTION,
             BURN_IN_PROTECTION_INTERVAL,
             USE_OLD_MOBILETYPE,
-            NOTIFICATION_SOUND_VIB_SCREEN_ON
+            NOTIFICATION_SOUND_VIB_SCREEN_ON,
+            STATUSBAR_HIDE_NOTCH
         };
 
         /**
@@ -5702,6 +5711,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(PROXIMITY_AUTO_SPEAKER_INCALL_ONLY);
             PRIVATE_SETTINGS.add(NOTIFICATION_SOUND_VIB_SCREEN_ON);
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);
+            PRIVATE_SETTINGS.add(STATUSBAR_HIDE_NOTCH);
         }
 
         /**
@@ -5826,6 +5836,7 @@ public final class Settings {
             VALIDATORS.put(BURN_IN_PROTECTION_INTERVAL, BURN_IN_PROTECTION_INTERVAL_VALIDATOR);
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_SOUND_VIB_SCREEN_ON, NOTIFICATION_SOUND_VIB_SCREEN_ON_VALIDATOR);
+            VALIDATORS.put(STATUSBAR_HIDE_NOTCH, STATUSBAR_HIDE_NOTCH_VALIDATOR);
         }
 
         /**
