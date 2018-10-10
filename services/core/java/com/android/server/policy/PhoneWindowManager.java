@@ -668,7 +668,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     MetricsLogger mLogger;
     private DeviceKeyHandler mDeviceKeyHandler;
     private HardkeyActionHandler mKeyHandler;
-    boolean mHasNavigationBar = false;
     
     private boolean mHandleVolumeKeysInWM;
 
