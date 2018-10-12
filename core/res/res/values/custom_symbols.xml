@@ -204,4 +204,8 @@
   <!-- SystemUI Restart -->
   <java-symbol type="string" name="systemui_restart_title" />
   <java-symbol type="string" name="systemui_restart_message" />
+
+  <!-- Component name of the combo network location provider. -->
+  <java-symbol type="string" name="config_comboNetworkLocationProvider" />
+
 </resources>
