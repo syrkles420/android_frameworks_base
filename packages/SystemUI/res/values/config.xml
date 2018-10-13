@@ -118,7 +118,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_default" translatable="false">
-        wifi,cell,bt,location,hotspot,sync,rotation,airplane,flashlight,battery,dnd,cast
+        wifi,cell,bt,location,hotspot,sync,rotation,airplane,flashlight,battery,dnd,cast,liquid
     </string>
 
     <!-- Tiles native to System UI. Order should match "quick_settings_tiles_default" -->
