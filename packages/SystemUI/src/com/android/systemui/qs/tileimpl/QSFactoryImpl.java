@@ -57,6 +57,7 @@ import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.OnTheGoTile;
 import com.android.systemui.qs.tiles.RebootTile;
+import com.android.systemui.qs.tiles.PieTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.ScreenrecordTile;
@@ -150,8 +151,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new SyncTile(mHost);
             case "hwkeys":
                 return new HWKeysTile(mHost);
-	        case "screenstabilization":
-		        return new ScreenStabilizationTile(mHost);
+	    case "screenstabilization":
+		return new ScreenStabilizationTile(mHost);
             case "expanded_desktop":
                 return new ExpandedDesktopTile(mHost);
             case "gaming":
@@ -194,6 +195,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new ThemeTile(mHost);
             case "nowplaying":
                 return new AmbientPlayTile(mHost);
+            case "pie":
+                return new PieTile(mHost);
         }
 
         // Intent tiles.
