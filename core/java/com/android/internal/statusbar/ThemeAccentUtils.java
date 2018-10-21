@@ -40,13 +40,6 @@ public class ThemeAccentUtils {
         "com.android.systemui.theme.black.liquid", // 2
     };
 
-    private static final String[] QS_TILE_THEMES = {
-        "com.android.systemui.qstile.default", // 0
-        "com.android.systemui.qstile.circletrim", // 1
-        "com.android.systemui.qstile.dualtonecircletrim", // 2
-        "com.android.systemui.qstile.squircletrim", // 3
-    };
-
     // Accents
     private static final String[] ACCENTS = {
         "default_accent", // 0
@@ -78,6 +71,16 @@ public class ThemeAccentUtils {
         "com.accents.userfive", // 26
         "com.accents.usersix", // 27
         "com.accents.userseven", // 28
+    };
+
+    private static final String[] QS_TILE_THEMES = {
+        "com.android.systemui.qstile.default", // 0
+        "com.android.systemui.qstile.circletrim", // 1
+        "com.android.systemui.qstile.dualtonecircletrim", // 2
+        "com.android.systemui.qstile.oreo", // 3
+        "com.android.systemui.qstile.oreocircletrim", // 4
+        "com.android.systemui.qstile.oreosquircletrim", // 5
+        "com.android.systemui.qstile.squircletrim", // 6
     };
 
     // Check for the dark system theme
