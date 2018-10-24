@@ -4575,12 +4575,25 @@ public class StatusBar extends SystemUI implements DemoMode,
         final boolean inflated = mStackScroller != null;
         boolean useBlackTheme = false;
         boolean useDarkTheme = false;
-        if (mCurrentTheme == 0) {
+	    final boolean wallpaperWantsDarkTheme;
+        if (userThemeSetting == 0 || userThemeSetting == 1) {
             // The system wallpaper defines if QS should be light or dark.
-            WallpaperColors systemColors = mColorExtractor
-                    .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
-            useDarkTheme = systemColors != null
-                    && (systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
+	        if (userThemeSetting == 0) {
+                WallpaperColors systemColors = mColorExtractor
+                        .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
+                wallpaperWantsDarkTheme = systemColors != null
+                        && (systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
+	        } else {
+	            wallpaperWantsDarkTheme = false;
+	        }
+	        final Configuration config = mContext.getResources().getConfiguration();
+            final boolean nightModeWantsDarkTheme = DARK_THEME_IN_NIGHT_MODE
+                    && (config.uiMode & Configuration.UI_MODE_NIGHT_MASK)
+                        == Configuration.UI_MODE_NIGHT_YES;
+            useDarkTheme = wallpaperWantsDarkTheme || nightModeWantsDarkTheme;
+            // Check for black and white accent so we don't end up
+            // with white on white or black on black
+            unfuckBlackWhiteAccent();
         } else {
             useBlackTheme = mCurrentTheme == 3;
             useDarkTheme = mCurrentTheme == 2;
