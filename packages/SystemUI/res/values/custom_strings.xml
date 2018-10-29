@@ -350,4 +350,6 @@
     <string name="pie_battery_level">"BATTERY LEVEL "</string>
     <string name="quick_settings_pie">Pie Control</string>
 
+    <string name="quick_settings_off">Off</string>
+
 </resources>
