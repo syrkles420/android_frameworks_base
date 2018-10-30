@@ -1166,10 +1166,16 @@ public class StatusBar extends SystemUI implements DemoMode,
                 if (mDozeServiceHost != null) {
                     mDozeServiceHost.firePowerSaveChanged(isPowerSave);
                 }
-                if (NIGHT_MODE_IN_BATTERY_SAVER) {
-                    mContext.getSystemService(UiModeManager.class).setNightMode(
-                        isPowerSave ? UiModeManager.MODE_NIGHT_YES : UiModeManager.MODE_NIGHT_NO);
-                }
+
+		        boolean BatterySaverDarkModeState = Settings.System.getIntForUser(mContext.getContentResolver(),
+                	Settings.System.BATTERY_SAVER_DARK_MODE, 0,
+                	UserHandle.USER_CURRENT) == 1;
+                    if (NIGHT_MODE_IN_BATTERY_SAVER == BatterySaverDarkModeState & isPowerSave)
+                        mContext.getSystemService(UiModeManager.class)
+			            .setNightMode(UiModeManager.MODE_NIGHT_YES);
+		            else
+		                mContext.getSystemService(UiModeManager.class)
+			            .setNightMode(UiModeManager.MODE_NIGHT_NO);
             }
 
             @Override
@@ -5381,6 +5387,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.PULSE_APPS_BLACKLIST),
                     false, this, UserHandle.USER_ALL);
+	        resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BATTERY_SAVER_DARK_MODE),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5410,6 +5419,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.PULSE_APPS_BLACKLIST))) {
                 setPulseBlacklist();
+	    } else if (uri.equals(Settings.System.getUriFor(
+		    Settings.System.BATTERY_SAVER_DARK_MODE))) {
+		// If the batterysaver is already turned on act accordingly
+		updateBatterySaverDarkMode();
             }
         }
 
@@ -5430,6 +5443,20 @@ public class StatusBar extends SystemUI implements DemoMode,
             setStatusDoubleTapToSleep();
             setBrightnessSlider();
         }
+    }
+
+    private void updateBatterySaverDarkMode() {
+	int batterySaverDarkState = Settings.System.getIntForUser(mContext.getContentResolver(),
+                	Settings.System.BATTERY_SAVER_DARK_MODE, 0,
+                	UserHandle.USER_CURRENT);
+
+	    if (batterySaverDarkState == 0 & mBatteryController.isPowerSave())
+            mContext.getSystemService(UiModeManager.class)
+                .setNightMode(UiModeManager.MODE_NIGHT_NO);
+
+        else if (batterySaverDarkState == 1 & mBatteryController.isPowerSave())
+            mContext.getSystemService(UiModeManager.class)
+                .setNightMode(UiModeManager.MODE_NIGHT_YES);
     }
 
     private void setHeadsUpStoplist() {

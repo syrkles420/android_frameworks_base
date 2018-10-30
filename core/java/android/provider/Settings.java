@@ -5608,6 +5608,14 @@ public final class Settings {
         /** @hide */
         private static final Validator BURN_IN_PROTECTION_INTERVAL_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
+ 	    /**
+	     * Make night mode on battery saver configurable
+	     * Values: switch state
+	     *
+	     * @hide
+	     */
+	    public static final String BATTERY_SAVER_DARK_MODE = "battery_saver_dark_mode";
+
         /**
          * @hide
          */
@@ -6201,6 +6209,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
             PRIVATE_SETTINGS.add(ONE_HAND_MODE_ENABLED);
             PRIVATE_SETTINGS.add(STATUSBAR_SHOW_WIFI_ACTIVITY);
+	        PRIVATE_SETTINGS.add(BATTERY_SAVER_DARK_MODE);
         }
 
         /**
