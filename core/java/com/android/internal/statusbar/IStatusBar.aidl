@@ -158,4 +158,5 @@ oneway interface IStatusBar
     void startAssist(in Bundle args);
     void restartUI();
     void toggleOrientationListener(boolean enable);
+    void leftInLandscapeChanged(boolean isLeft);
 }
