@@ -5446,7 +5446,13 @@ public final class Settings {
         public static final String PULSE_AUTO_COLOR = "pulse_auto_color";
 
         /**
-         * Force expanded notifications on all apps that support it.
+         * Apps to skip for Pulse
+         * @hide
+         */
+        public static final String PULSE_APPS_BLACKLIST = "pulse_apps_blacklist";
+
+        /**
+         * Weather to use a custom color for the visualizer on the lock screen
          * @hide
          */
         public static final String FORCE_EXPANDED_NOTIFICATIONS = "force_expanded_notifications";
