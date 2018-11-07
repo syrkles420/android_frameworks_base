@@ -4642,14 +4642,14 @@ public class StatusBar extends SystemUI implements DemoMode,
      * Switches theme from light to dark and vice-versa.
      */
     protected void updateTheme() {
-        final boolean inflated = mStackScroller != null;
+        final boolean inflated = mStackScroller != null && mStatusBarWindowManager != null;
         boolean useBlackTheme = false;
         boolean useDarkTheme = false;
 	    final boolean wallpaperWantsDarkTheme;
         haltTicker();
-        if (userThemeSetting == 0 || userThemeSetting == 1) {
+        if (mCurrentTheme == 0 || mCurrentTheme == 1) {
             // The system wallpaper defines if QS should be light or dark.
-	        if (userThemeSetting == 0) {
+	        if (mCurrentTheme == 0) {
                 WallpaperColors systemColors = mColorExtractor
                         .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
                 wallpaperWantsDarkTheme = systemColors != null
