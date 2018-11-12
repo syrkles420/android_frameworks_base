@@ -243,11 +243,11 @@ static jboolean YuvImage_compressToJpeg(JNIEnv* env, jobject, jbyteArray inYuv,
     jint* imgOffsets = env->GetIntArrayElements(offsets, NULL);
     jint* imgStrides = env->GetIntArrayElements(strides, NULL);
     YuvToJpegEncoder* encoder = YuvToJpegEncoder::create(format, imgStrides);
-    jboolean result = false;
+    jboolean result = JNI_FALSE;
     if (encoder != NULL) {
         encoder->encode(strm, yuv, width, height, imgOffsets, jpegQuality);
         delete encoder;
-        result = true;
+        result = JNI_TRUE;
     }
 
     env->ReleaseByteArrayElements(inYuv, yuv, 0);

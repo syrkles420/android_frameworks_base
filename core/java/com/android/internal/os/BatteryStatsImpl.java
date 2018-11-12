@@ -13473,28 +13473,37 @@ public class BatteryStatsImpl extends BatteryStats {
             return;
         }
 
-        final Parcel out = Parcel.obtain();
+        Parcel out = Parcel.obtain();
         writeSummaryToParcel(out, true);
         mLastWriteTime = mClocks.elapsedRealtime();
 
+        if (mPendingWrite != null) {
+            mPendingWrite.recycle();
+        }
+        mPendingWrite = out;
+
         if (sync) {
-            commitPendingDataToDisk(out);
+            commitPendingDataToDisk();
         } else {
             BackgroundThread.getHandler().post(new Runnable() {
                 @Override public void run() {
-                    commitPendingDataToDisk(out);
+                    commitPendingDataToDisk();
                 }
             });
         }
     }
 
-    public void commitPendingDataToDisk(Parcel next) {
-        if (next == null) {
-            return;
+    public void commitPendingDataToDisk() {
+        final Parcel next;
+        synchronized (this) {
+            next = mPendingWrite;
+            mPendingWrite = null;
+            if (next == null) {
+                return;
+            }
         }
 
         mWriteLock.lock();
-
         try {
             final long startTime = SystemClock.uptimeMillis();
             FileOutputStream stream = new FileOutputStream(mFile.chooseForWrite());
