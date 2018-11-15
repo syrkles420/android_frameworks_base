@@ -4904,9 +4904,7 @@ public class NotificationManagerService extends SystemService {
         // light
         // release the light
         boolean wasShowLights = mLights.remove(key);
-        if (record.getLight() != null && aboveThreshold
-                && ((record.getSuppressedVisualEffects() & SUPPRESSED_EFFECT_SCREEN_OFF) == 0)
-                && (!record.isIntercepted() || (record.isIntercepted() && record.shouldLightOnZen()))) {
+        if (canShowLightsLocked(record, aboveThreshold)) {
             mLights.add(key);
             updateLightsLocked();
             if (mUseAttentionLight) {
@@ -4975,7 +4973,8 @@ public class NotificationManagerService extends SystemService {
             return false;
         }
         // suppressed due to DND
-        if ((record.getSuppressedVisualEffects() & SUPPRESSED_EFFECT_LIGHTS) != 0) {
+        if ((record.getSuppressedVisualEffects() & SUPPRESSED_EFFECT_LIGHTS) != 0
+            && (record.isIntercepted() || (!record.isIntercepted() && !record.shouldLightOnZen()))) {
             return false;
         }
         // Suppressed because it's a silent update
