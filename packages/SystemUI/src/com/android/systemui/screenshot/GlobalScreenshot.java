@@ -92,7 +92,6 @@ import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * POD used in the AsyncTask which saves an image in the background.
@@ -138,23 +137,6 @@ class SaveImageInBackgroundTask extends AsyncTask<Void, Void, Void> {
     private final BigPictureStyle mNotificationStyle;
     private final int mImageWidth;
     private final int mImageHeight;
-
-    private static CharSequence getRunningActivityName(Context context) {
-        final ActivityManager am =
-                (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        final PackageManager pm = context.getPackageManager();
-
-        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
-        if (tasks != null && !tasks.isEmpty()) {
-            ActivityManager.RunningTaskInfo top = tasks.get(0);
-            try {
-                ActivityInfo info = pm.getActivityInfo(top.topActivity, 0);
-                return pm.getApplicationLabel(info.applicationInfo);
-            } catch (PackageManager.NameNotFoundException e) {
-            }
-        }
-        return null;
-    }
 
     SaveImageInBackgroundTask(Context context, SaveImageInBackgroundData data,
             NotificationManager nManager) {
