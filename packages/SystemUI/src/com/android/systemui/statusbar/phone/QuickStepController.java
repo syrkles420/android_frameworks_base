@@ -240,7 +240,7 @@ public class QuickStepController implements GestureHelper {
                     isDoubleTapPending = false;
                     wasConsumed = true;
                     mHandler.removeCallbacks(mDoubleTapCancelTimeout);
-                    HavocUtils.switchScreenOff(mContext);
+                    LiquidUtils.switchScreenOff(mContext);
                 } else {
                     // this is the first tap, let's go further and schedule a
                     // mDoubleTapCancelTimeout call in the action up event so after the set time
@@ -381,7 +381,7 @@ public class QuickStepController implements GestureHelper {
             wasConsumed = false;
             isDoubleTapPending = false;
             // it was a single tap, let's trigger the home button action
-            HavocUtils.sendKeycode(KeyEvent.KEYCODE_HOME);
+            LiquidUtils.sendKeycode(KeyEvent.KEYCODE_HOME);
         }
     };
 
