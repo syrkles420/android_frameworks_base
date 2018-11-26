@@ -343,7 +343,7 @@ public class NotificationMediaManager implements Dumpable {
             if (mListener != null) {
                 mListener.onMediaUpdated(true);
             }
-            if (mStatusBar != null) {
+            if (mStatusBar != null && mStatusBar.getVisualizer() != null) {
                 mStatusBar.getVisualizer().setPlaying(true);
             }
         } else {
@@ -351,7 +351,7 @@ public class NotificationMediaManager implements Dumpable {
             if (mListener != null) {
                 mListener.onMediaUpdated(false);
             }
-            if (mStatusBar != null) {
+            if (mStatusBar != null && mStatusBar.getVisualizer() != null) {
                 mStatusBar.getVisualizer().setPlaying(false);
             }
         }
