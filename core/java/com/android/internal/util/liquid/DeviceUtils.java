@@ -13,6 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+
 package com.android.internal.util.liquid;
 
 import android.bluetooth.BluetoothAdapter;
@@ -153,5 +154,4 @@ public class DeviceUtils {
     public static boolean isTablet(Context con) {
         return getScreenType(con) == DEVICE_TABLET;
     }
-
 }

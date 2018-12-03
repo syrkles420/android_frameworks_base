@@ -4352,12 +4352,6 @@ public final class Settings {
         public static final String STABILIZATION_VELOCITY_AMPLITUDE = "stabilization_velocity_amplitude";
 
         /**
-         * Wether navigation bar is enabled or not
-         * @hide
-         */
-        public static final String NAVIGATION_BAR_SHOW = "navigation_bar_show";
-
-        /**
          * MediaScanner behavior on boot.
          * 0 = enabled
          * 1 = ask (notification)
@@ -6140,7 +6134,7 @@ public final class Settings {
         private static final Validator VOLUME_KEYS_CONTROL_RING_TONE_VALIDATOR =
 		BOOLEAN_VALIDATOR;
 
-	/**
+	    /**
          * Weather lockscreen temperature scale
          * @hide
          */
