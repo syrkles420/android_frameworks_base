@@ -1109,7 +1109,7 @@ public class SignalStrength implements Parcelable {
     public int getWcdmaLevel() {
         int level = SIGNAL_STRENGTH_NONE_OR_UNKNOWN;
 
-        if (TextUtils.isEmpty(mWcdmaDefaultSignalMeasurement)) {
+        if (mWcdmaDefaultSignalMeasurement == null) {
             Log.wtf(LOG_TAG, "getWcdmaLevel - WCDMA default signal measurement is invalid.");
             return level;
         }
