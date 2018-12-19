@@ -21,6 +21,9 @@ import static android.app.StatusBarManager.WINDOW_STATE_SHOWING;
 import static android.app.StatusBarManager.windowStateToString;
 import static android.app.WindowConfiguration.WINDOWING_MODE_FULLSCREEN_OR_SPLIT_SCREEN_SECONDARY;
 
+import static android.provider.Settings.Secure.AMBIENT_RECOGNITION;
+import static android.provider.Settings.Secure.AMBIENT_RECOGNITION_KEYGUARD;
+
 import static com.android.systemui.keyguard.WakefulnessLifecycle.WAKEFULNESS_ASLEEP;
 import static com.android.systemui.keyguard.WakefulnessLifecycle.WAKEFULNESS_AWAKE;
 import static com.android.systemui.keyguard.WakefulnessLifecycle.WAKEFULNESS_WAKING;
@@ -38,10 +41,9 @@ import static com.android.systemui.statusbar.phone.BarTransitions.MODE_TRANSLUCE
 import static com.android.systemui.statusbar.phone.BarTransitions.MODE_TRANSPARENT;
 import static com.android.systemui.statusbar.phone.BarTransitions.MODE_WARNING;
 
-import com.android.systemui.ambient.play.AmbientIndicationManager;
-import com.android.systemui.ambient.play.AmbientIndicationManagerCallback;
-import com.android.systemui.ambient.play.RecognitionObserver.Observable;
-import com.android.systemui.ambient.play.AmbientIndicationContainer;
+import android.ambient.AmbientIndicationManager;
+import android.ambient.AmbientIndicationManagerCallback;
+import android.ambient.play.RecoginitionObserver.Observable;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -153,6 +155,7 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.view.accessibility.AccessibilityManager;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.DateTimeView;
 import android.widget.FrameLayout;
 import android.widget.ImageSwitcher;
@@ -195,6 +198,9 @@ import com.android.systemui.RecentsComponent;
 import com.android.systemui.SystemUI;
 import com.android.systemui.SystemUIFactory;
 import com.android.systemui.UiOffloadThread;
+import com.android.systemui.ambient.AmbientIndicationContainer;
+import com.android.systemui.ambient.AmbientIndicationNotification;
+import com.android.systemui.ambient.play.RecoginitionObserverFactory;
 import com.android.systemui.assist.AssistManager;
 import com.android.systemui.charging.WirelessChargingAnimation;
 import com.android.systemui.classifier.FalsingLog;
@@ -742,16 +748,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     super.onStrongAuthStateChanged(userId);
                     mEntryManager.updateNotifications();
                 }
-
-                @Override
-                public void onKeyguardVisibilityChanged(boolean showing) {
-                    try {
-                        if (!showing && mRecognitionEnabled){
-                            hideAmbientPlayIndication(0, true);
-                        }
-                    } catch (Exception e) {
-                    }
-                }
             };
 
     private NavigationBarFragment mNavigationBar;
@@ -763,11 +759,14 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private boolean mLockscreenMediaMetadata;
 
-    private AmbientIndicationManager mAmbientIndicationManager;
+    private AmbientIndicationNotification mAmbientNotification;
+    private RecoginitionObserverFactory mRecognition;
     private boolean mRecognitionEnabled;
-    private boolean mRecognitionEnabledOnKeyguard;
-    private Handler ambientClearingHandler;
-    private Runnable ambientClearingRunnable;
+
+    /* Interval indicating when AP-Recogntion will run. Default is 2 minutes */
+    private static final int AMBIENT_RECOGNITION_INTERVAL = 120000;
+    /* Interval indicating the max recording time. Default is 19 seconds */
+    private static final int AMBIENT_RECOGNITION_INTERVAL_MAX = 19000;
 
     @Override
     public void start() {
@@ -880,6 +879,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         mWallpaperChangedReceiver.onReceive(mContext, null);
 
         mLockscreenUserManager.setUpWithPresenter(this, mEntryManager);
+        mAmbientSettingsObserver.observe();
+        mAmbientSettingsObserver.update();
         mCommandQueue.disable(switches[0], switches[6], false /* animate */);
         setSystemUiVisibility(switches[1], switches[7], switches[8], 0xffffffff,
                 fullscreenStackBounds, dockedStackBounds);
@@ -954,8 +955,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mUpdateCallback);
         putComponent(DozeHost.class, mDozeServiceHost);
 
-        mAmbientIndicationManager = new AmbientIndicationManager(mContext);
-        mAmbientIndicationManager.registerCallback(mAmbientCallback);
+        AmbientIndicationManager.getInstance(mContext).registerCallback(mAmbientCallback);
 
         mScreenPinningRequest = new ScreenPinningRequest(mContext);
         mFalsingManager = FalsingManager.getInstance(mContext);
@@ -975,7 +975,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         final Context context = mContext;
 
         mScreenWidth = (float) context.getResources().getDisplayMetrics().widthPixels;
-
         mMinBrightness = context.getResources().getInteger(
                 com.android.internal.R.integer.config_screenBrightnessDim);
 
@@ -1118,14 +1117,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mAmbientIndicationContainer != null) {
             ((AmbientIndicationContainer) mAmbientIndicationContainer).initializeView(this);
         }
-
-        // Initialize handler and runnable
-        ambientClearingHandler = new Handler();
-        ambientClearingRunnable = new Runnable(){
-            @Override
-            public void run() {
-            }
-        };
 
         // set the initial view visibility
         setAreThereNotifications();
@@ -1295,82 +1286,47 @@ public class StatusBar extends SystemUI implements DemoMode,
         ThreadedRenderer.overrideProperty("ambientRatio", String.valueOf(1.5f));
 
         mFlashlightController = Dependency.get(FlashlightController.class);
+
+        mAmbientNotification = new AmbientIndicationNotification(mContext);
     }
 
     private AmbientIndicationManagerCallback mAmbientCallback = new AmbientIndicationManagerCallback() {
         @Override
         public void onRecognitionResult(Observable observed) {
+            if (observed.Song == null && observed.Artist == null) return;
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (mRecognitionEnabled && mRecognitionEnabledOnKeyguard){
-                        ((AmbientIndicationContainer) mAmbientIndicationContainer).setIndication(observed.Song, observed.Artist);
-                        if (isKeyguardShowing()){
-                            showAmbientPlayIndication();
-                            hideAmbientPlayIndication(mAmbientIndicationManager.getAmbientClearViewInterval(), true);
-                        }else{
-                            hideAmbientPlayIndication(0, true);
-                        }
-                    }else{
-                        hideAmbientPlayIndication(0, true);
-                    }
+                    ((AmbientIndicationContainer) mAmbientIndicationContainer)
+                                .setIndication(observed.Song, observed.Artist);
+                    mAmbientNotification.show(observed.Song, observed.Artist);
+                    doStopAmbientRecognition();
                 }
             });
         }
 
         @Override
         public void onRecognitionNoResult() {
-            hideAmbientPlayIndication(0, true);
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    ((AmbientIndicationContainer) mAmbientIndicationContainer).hideIndication();
+                    doStopAmbientRecognition();
+                }
+            });
         }
 
         @Override
         public void onRecognitionError() {
-            hideAmbientPlayIndication(0, true);
-        }
-
-        @Override
-        public void onSettingsChanged(String key, boolean newValue) {
-            if (key.equals(Settings.System.AMBIENT_RECOGNITION)){
-                mRecognitionEnabled = newValue;
-            }else if (key.equals(Settings.System.AMBIENT_RECOGNITION_KEYGUARD)){
-                mRecognitionEnabledOnKeyguard = newValue;
-            }
-        }
-    };
-
-    private void showAmbientPlayIndication(){
-        try {
-            if (mAmbientIndicationContainer != null){
-                mAmbientIndicationContainer.setVisibility(View.VISIBLE);
-                ((AmbientIndicationContainer) mAmbientIndicationContainer).showIndication();
-            }
-        } catch (Exception e) {
-        }
-    }
-
-    private void hideAmbientPlayIndication(int interval, final boolean forceClear){
-        try {
-            ambientClearingHandler.removeCallbacks(ambientClearingRunnable);
-            ambientClearingRunnable = new Runnable(){
+            mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (mAmbientIndicationContainer != null){
-                        ((AmbientIndicationContainer) mAmbientIndicationContainer).hideIndication();
-                        mAmbientIndicationContainer.setVisibility(View.GONE);
-                        if (forceClear){
-                            ((AmbientIndicationContainer) mAmbientIndicationContainer).setIndication(null, null);
-                        }
-                    }
+                    ((AmbientIndicationContainer) mAmbientIndicationContainer).hideIndication();
+                    doStopAmbientRecognition();
                 }
-            };
-            if (interval == 0){
-                ambientClearingHandler.post(ambientClearingRunnable);
-            }else{
-                ambientClearingHandler.postDelayed(ambientClearingRunnable, interval);
-            }
-        } catch (Exception e) {
+            });
         }
-    }
+    };
 
     protected void createNavigationBar() {
         mNavigationBarView = NavigationBarFragment.create(mContext, (tag, fragment) -> {
@@ -2050,7 +2006,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             mVisualizerView.setBitmap(((BitmapDrawable)artworkDrawable).getBitmap());
         }
 
-        if ((hasArtwork || DEBUG_MEDIA_FAKE_ARTWORK)
+        if ((hasArtwork || DEBUG_MEDIA_FAKE_ARTWORK) && !mDozing
                 && (mState != StatusBarState.SHADE || allowWhenShade)
                 && mFingerprintUnlockController.getMode()
                         != FingerprintUnlockController.MODE_WAKE_AND_UNLOCK_PULSING
@@ -4139,7 +4095,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     public void destroy() {
         // Begin old BaseStatusBar.destroy().
         mContext.unregisterReceiver(mBannerActionBroadcastReceiver);
-        mAmbientIndicationManager.unregister();
         mLockscreenUserManager.destroy();
         try {
             mNotificationListener.unregisterAsSystemService();
@@ -4608,6 +4563,15 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
+    private void updateAmbientIndicationForKeyguard() {
+        int recognitionKeyguard = Settings.Secure.getInt(
+            mContext.getContentResolver(), AMBIENT_RECOGNITION_KEYGUARD, 1);
+        if (!mRecognitionEnabled) return;
+        if (mAmbientIndicationContainer != null && recognitionKeyguard != 0) {
+            mAmbientIndicationContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
     protected void updateKeyguardState(boolean goingToFullShade, boolean fromShadeLocked) {
         Trace.beginSection("StatusBar#updateKeyguardState");
         if (mState == StatusBarState.KEYGUARD) {
@@ -4617,9 +4581,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mKeyguardUserSwitcher.setKeyguard(true, fromShadeLocked);
             }
             if (mStatusBarView != null) mStatusBarView.removePendingHideExpandedRunnables();
-            if (mAmbientIndicationContainer != null && mRecognitionEnabled && mRecognitionEnabledOnKeyguard) {
-                showAmbientPlayIndication();
-            }
+            updateAmbientIndicationForKeyguard();
         } else {
             mKeyguardIndicationController.setVisible(false);
             if (mKeyguardUserSwitcher != null) {
@@ -4628,7 +4590,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                         mState == StatusBarState.SHADE_LOCKED ||
                         fromShadeLocked);
             }
-            hideAmbientPlayIndication(0, false);
+            if (mAmbientIndicationContainer != null) {
+                mAmbientIndicationContainer.setVisibility(View.INVISIBLE);
+            }
         }
         mNotificationPanel.setBarState(mState, mKeyguardFadingAway, goingToFullShade);
         updateTheme();
@@ -4643,6 +4607,30 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mUnlockMethodCache.isMethodSecure(),
                 mStatusBarKeyguardViewManager.isOccluded());
         Trace.endSection();
+    }
+
+    private void initAmbientRecognition() {
+        mRecognitionEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
+                AMBIENT_RECOGNITION, 0) != 0;
+        if (!mRecognitionEnabled) return;
+        mRecognition = new RecoginitionObserverFactory(mContext);
+        doAmbientRecognition();
+    }
+
+    private void doAmbientRecognition() {
+        if (!mRecognitionEnabled) return;
+        mRecognition.startRecording();
+        mHandler.postDelayed(() -> {
+                 doStopAmbientRecognition();
+        }, AMBIENT_RECOGNITION_INTERVAL_MAX);
+    }
+
+    private void doStopAmbientRecognition() {
+        mRecognition.stopRecording();
+        Log.d(TAG, "Will start listening again in 2 minutes");
+        mHandler.postDelayed(() -> {
+                 initAmbientRecognition();
+        }, AMBIENT_RECOGNITION_INTERVAL);
     }
 
     private void getCurrentThemeSetting() {
@@ -5827,6 +5815,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             mKeyguardViewMediator.setAodShowing(mDozing);
             mStatusBarWindowManager.setDozing(mDozing);
             mStatusBarKeyguardViewManager.setDozing(mDozing);
+            if (mAmbientIndicationContainer instanceof DozeReceiver) {
+                ((DozeReceiver) mAmbientIndicationContainer).setDozing(mDozing);
+            }
             mEntryManager.updateNotifications();
             updateDozingState();
             updateReportRejectedTouchVisibility();
@@ -6544,6 +6535,33 @@ public class StatusBar extends SystemUI implements DemoMode,
             recomputeDisableFlags(true);
         }
         updateHideIconsForBouncer(true /* animate */);
+    }
+
+    private AmbientSettingsObserver mAmbientSettingsObserver = new AmbientSettingsObserver(mHandler);
+    private class AmbientSettingsObserver extends ContentObserver {
+        AmbientSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.AMBIENT_RECOGNITION),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.AMBIENT_RECOGNITION_KEYGUARD),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            update();
+        }
+
+        public void update() {
+            initAmbientRecognition();
+            updateAmbientIndicationForKeyguard();
+        }
     }
 
     public void restartUI() {

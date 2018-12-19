@@ -74,10 +74,6 @@
     <string name="systemui_restart_title">SystemUI restart required</string>
     <string name="systemui_restart_message">For all changes to take effect, a SystemUI restart is required. Restart SystemUI now?</string>
 
-    <!-- Ambient play -->
-    <string name="ambient_recognition_notification">Now Playing</string>
-    <string name="ambient_recognition_information">%1$s by %2$s</string>
-
     <!-- App ops requests -->
     <string name="app_ops_access_camera">access the camera</string>
     <string name="app_ops_access_location">access your location</string>
@@ -180,4 +176,5 @@
     <string name="permlab_toggleNavigationEditor">control navigation editor</string>
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_toggleNavigationEditor">Allows an application to control the navigation bar editor.</string>
+
 </resources>

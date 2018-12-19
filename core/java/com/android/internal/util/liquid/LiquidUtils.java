@@ -355,11 +355,4 @@ public class LiquidUtils {
     public static boolean isABdevice(Context context) {
         return SystemProperties.getBoolean("ro.build.ab_update", false);
     }
-
-    public static boolean isConnectionAvailable(Context context) {
-        ConnectivityManager connManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo network = (connManager != null) ? connManager.getActiveNetworkInfo() : null;
-        return network != null;
-    }
 }
