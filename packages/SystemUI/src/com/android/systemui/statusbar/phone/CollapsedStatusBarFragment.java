@@ -458,7 +458,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                         animateShow(mLiquidLogo, animate);
                     }
                 } else {
-                    animateHide(mLiquidLogo, animate, false);
+                    animateHide(mLiquidLogo, animate);
                 }
             }
         } catch (Exception e) {
