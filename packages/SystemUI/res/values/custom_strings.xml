@@ -337,11 +337,6 @@
     <string name="theme_info_title">What is this?</string>
     <string name="theme_info_message">The Themes tile is a unique but easy to use tile that allows the user to change the system accent or style.\n\nTo change between accents and styles, simply long press on the tile and then press again to select from the options offered.</string>
 
-    <!-- AmbientPlay: The contents of the displayed recognition. -->
-    <string name="ambient_recognition_notification">Now Playing</string>
-    <string name="ambient_recognition_notification_channel">Recognized Music Notifications</string>
-    <string name="ambient_recognition_information">%1$s by %2$s</string>
-
     <!-- Screen pinning dialog description. (for devices without navbar) -->
     <string name="screen_pinning_description_no_navbar">This keeps it in view until you unpin. Touch &amp; hold Back to unpin.</string>
     <!-- Notify use that they are in Lock-to-app (for devices without navbar)-->
@@ -405,4 +400,5 @@
     <string name="dlg_ok">@android:string/ok</string>
     <string name="dlg_cancel">@android:string/cancel</string>
     <string name="kill">Kill App</string>
+
 </resources>
